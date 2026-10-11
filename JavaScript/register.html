@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="vi">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Đăng ký | Giọt nước hy vọng</title>
+	<link rel="stylesheet" href="../CSS/auth.css">
+</head>
+<body>
+	<main class="layout">
+		<section class="story" aria-labelledby="campaign-title">
+			<div>
+				<p class="eyebrow">Giọt nước hy vọng · Chung tay sẻ chia</p>
+				<h1 id="campaign-title">Một giọt nước.<br>Một ngày mai.</h1>
+				<p class="story-copy">Cùng góp sức để trẻ em tại những vùng khô hạn ở châu Phi có nước sạch, sức khỏe và thêm cơ hội đến trường.</p>
+			</div>
+			<p class="story-note">“Nước sạch không nên là điều xa xỉ.” Mỗi sự chung tay đều có thể mở ra một khởi đầu tốt hơn.</p>
+		</section>
+		<section class="form-panel" aria-labelledby="form-title">
+			<h2 id="form-title">Tạo tài khoản</h2>
+			<p class="form-intro">Đăng ký để cùng lan tỏa hy vọng.</p>
+			<form id="register-form" novalidate>
+				<label for="email">Email</label>
+				<input id="email" name="email" type="email" autocomplete="email" placeholder="ban@gmail.com" required>
+				<label for="username">Tên người dùng</label>
+				<input id="username" name="username" type="text" autocomplete="username" placeholder="Tên của bạn" required>
+				<label for="password">Mật khẩu</label>
+				<input id="password" name="password" type="password" autocomplete="new-password" placeholder="Ít nhất 9 ký tự, gồm ký tự đặc biệt" required>
+				<label for="confirm-password">Nhập lại mật khẩu</label>
+				<input id="confirm-password" name="confirm-password" type="password" autocomplete="new-password" placeholder="Nhập lại mật khẩu" required>
+				<p class="message" id="form-message" role="status" aria-live="polite"></p>
+				<button type="submit">Đăng ký</button>
+			</form>
+			<p class="switch">Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+		</section>
+	</main>
+	<script src="register.js" defer></script>
+</body>
+</html>

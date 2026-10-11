@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng nhập | Giọt nước hy vọng</title>
+  <link rel="stylesheet" href="../CSS/auth.css">
+</head>
+<body>
+  <main class="login-panel">
+    <p class="eyebrow">Giọt nước hy vọng</p>
+    <h1>Chào mừng trở lại</h1>
+    <p class="intro">Đăng nhập để tiếp tục chung tay sẻ chia.</p>
+    <form id="login-form" novalidate>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="email" placeholder="ban@gmail.com" required>
+      <label for="password">Mật khẩu</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Mật khẩu của bạn" required>
+      <p class="message" id="form-message" role="status" aria-live="polite"></p>
+      <button type="submit">Đăng nhập</button>
+    </form>
+    <p class="switch">Chưa có tài khoản? <a href="register.html">Đăng ký</a></p>
+  </main>
+  <script src="login.js" defer></script>
+</body>
+</html>
