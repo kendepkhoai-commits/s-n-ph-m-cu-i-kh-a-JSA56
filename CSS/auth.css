@@ -62,6 +62,33 @@ body::before {
 	text-transform: uppercase;
 }
 
+.brand-lockup {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 4px;
+	margin-bottom: 28px;
+	color: var(--rust);
+	text-decoration: none;
+}
+
+.brand-name {
+	font: 800 20px/1.1 "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+}
+
+.brand-slogan {
+	color: var(--muted);
+	font: 12px/1.45 "Segoe UI", Arial, sans-serif;
+}
+
+.story .brand-lockup {
+	color: var(--paper);
+}
+
+.story .brand-slogan {
+	color: #f3e6d7;
+}
+
 h1 {
 	max-width: 470px;
 	margin: 20px 0 18px;
@@ -83,7 +110,7 @@ h1 {
 	padding-left: 16px;
 	border-left: 2px solid #dc9a68;
 	color: #f5dcc4;
-	font: italic 15px/1.6 Georgia, serif;
+	font: italic 15px/1.6 "Segoe UI", Arial, sans-serif;
 }
 
 .form-panel {
@@ -113,13 +140,6 @@ h1 {
 	background: var(--paper);
 	box-shadow: 0 26px 80px rgb(32 17 10 / 36%);
 	animation: arrive 420ms ease-out both;
-}
-
-.login-panel .eyebrow {
-	margin-bottom: 13px;
-	color: var(--rust);
-	font-size: 11px;
-	letter-spacing: 1.7px;
 }
 
 .login-panel h1 {
