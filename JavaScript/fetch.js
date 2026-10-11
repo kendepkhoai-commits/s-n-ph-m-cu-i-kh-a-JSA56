@@ -8,12 +8,16 @@ async function getData() {
         const response = await fetch(api);
 
         console.log("HTTP status:", response.status);
+        if (!response.ok) {
+            throw new Error(`API trả về HTTP ${response.status}`);
+        }
 
         const data = await response.json();
 
         console.log("Thong tin API:", data[0]);
 
-        if (!data[1]) {
+        // The World Bank API returns metadata and records as a two-item array.
+        if (!Array.isArray(data) || !Array.isArray(data[1]) || data[1].length === 0) {
             console.log("API khong tra ve danh sach du lieu.");
             return;
         }

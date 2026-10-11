@@ -36,7 +36,7 @@ registerForm.addEventListener("submit", (event) => {
 	}
 
 	try {
-		// localStorage is required for this demo, but it stores the password in plain text.
+		// This demo stores credentials locally in plain text; do not use this as production authentication.
 		localStorage.setItem("waterAidAccount", JSON.stringify({ email, username, password }));
 	} catch {
 		showMessage("Không thể lưu tài khoản trên trình duyệt này.");

@@ -46,8 +46,16 @@ loginForm.addEventListener("submit", (event) => {
 		return;
 	}
 
+	// Email casing is insignificant, but passwords must match exactly.
 	if (email.toLowerCase() !== account.email.toLowerCase() || password !== account.password) {
 		showMessage("Email hoặc mật khẩu không chính xác.");
+		return;
+	}
+
+	try {
+		sessionStorage.setItem("waterAidAuthenticated", "1");
+	} catch {
+		showMessage("Không thể tạo phiên đăng nhập trên trình duyệt này.");
 		return;
 	}
 
