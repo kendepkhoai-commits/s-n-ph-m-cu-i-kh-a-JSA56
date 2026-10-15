@@ -46,7 +46,7 @@ loginForm.addEventListener("submit", (event) => {
 		return;
 	}
 
-	// Email casing is insignificant, but passwords must match exactly.
+	// Email không phân biệt chữ hoa/thường; mật khẩu thì phải khớp chính xác.
 	if (email.toLowerCase() !== account.email.toLowerCase() || password !== account.password) {
 		showMessage("Email hoặc mật khẩu không chính xác.");
 		return;

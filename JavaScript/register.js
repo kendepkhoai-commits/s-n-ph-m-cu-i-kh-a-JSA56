@@ -23,7 +23,7 @@ registerForm.addEventListener("submit", (event) => {
 		return;
 	}
 
-	// Unicode categories keep accented letters from being mistaken for punctuation.
+	// Nhóm Unicode giúp chữ có dấu không bị tính nhầm là ký tự đặc biệt.
 	const hasSpecialCharacter = /[^\p{L}\p{N}\s]/u.test(password);
 	const characterCount = [...password].length;
 	if (characterCount <= 8 || !hasSpecialCharacter) {
@@ -36,7 +36,7 @@ registerForm.addEventListener("submit", (event) => {
 	}
 
 	try {
-		// This demo stores credentials locally in plain text; do not use this as production authentication.
+		// Bản demo lưu mật khẩu dạng rõ trong trình duyệt; không dùng cách này cho xác thực thật.
 		localStorage.setItem("waterAidAccount", JSON.stringify({ email, username, password }));
 	} catch {
 		showMessage("Không thể lưu tài khoản trên trình duyệt này.");

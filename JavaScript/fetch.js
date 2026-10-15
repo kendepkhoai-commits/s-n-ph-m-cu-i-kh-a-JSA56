@@ -1,37 +1,34 @@
 
 const api = "https://api.worldbank.org/v2/country/all/indicator/SH.H2O.BASW.ZS?format=json&mrnev=1&per_page=300";
+const countriesApi = "https://api.worldbank.org/v2/country?format=json&per_page=400";
 
-async function getData() {
-    try {
-        console.log("Dang goi API...");
-
-        const response = await fetch(api);
-
-        console.log("HTTP status:", response.status);
-        if (!response.ok) {
-            throw new Error(`API trả về HTTP ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        console.log("Thong tin API:", data[0]);
-
-        // The World Bank API returns metadata and records as a two-item array.
-        if (!Array.isArray(data) || !Array.isArray(data[1]) || data[1].length === 0) {
-            console.log("API khong tra ve danh sach du lieu.");
-            return;
-        }
-
-        const validData = data[1].filter(
-            item => item.value !== null
-        );
-
-        console.log("So ban ghi co du lieu:", validData.length);
-        console.log("5 ban ghi dau tien:", validData.slice(0, 5));
-
-    } catch (error) {
-        console.log("LOI:", error.message);
+async function getWaterAccessData() {
+    const [indicatorResponse, countriesResponse] = await Promise.all([fetch(api), fetch(countriesApi)]);
+    if (!indicatorResponse.ok || !countriesResponse.ok) {
+        throw new Error("Không thể kết nối với World Bank API.");
     }
+
+    const [indicatorPayload, countriesPayload] = await Promise.all([
+        indicatorResponse.json(),
+        countriesResponse.json()
+    ]);
+    if (!Array.isArray(indicatorPayload?.[1]) || !Array.isArray(countriesPayload?.[1])) {
+        throw new Error("World Bank API không trả về dữ liệu hợp lệ.");
+    }
+
+    // Vùng MEA của World Bank còn gồm Trung Đông; chỉ nhận các mã quốc gia Bắc Phi cần thiết.
+    const northAfricanCountries = new Set(["DZA", "EGY", "LBY", "MAR", "SDN", "TUN"]);
+    // Bản ghi chỉ số thiếu thông tin vùng, nên ghép bằng mã ISO3 với danh mục quốc gia.
+    const africanCountryCodes = new Set(countriesPayload[1]
+        .filter(country => country.region?.id === "SSF" ||
+            (country.region?.id === "MEA" && northAfricanCountries.has(country.id)))
+        .map(country => country.id));
+
+    return indicatorPayload[1].filter(item =>
+        typeof item.value === "number" &&
+        typeof item.country?.value === "string" &&
+        africanCountryCodes.has(item.countryiso3code)
+    );
 }
 
-getData();
+window.getWaterAccessData = getWaterAccessData;

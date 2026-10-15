@@ -20,11 +20,11 @@ body {
 	padding: 28px;
 	color: var(--ink);
 	font-family: Georgia, "Times New Roman", serif;
-	/* This path is relative to CSS/auth.css, not the HTML page. */
-	background: #8d5138 url("../Image/menu.webp") center / cover fixed no-repeat;
+	/* Đường dẫn ảnh được tính từ CSS/auth.css, không phải từ file HTML. */
+	background: #8d5138 url("../Image/register.webp") center / cover fixed no-repeat;
 }
 
-/* The fixed overlay darkens the photo while keeping the form above it. */
+/* Lớp phủ làm tối ảnh nền; các biểu mẫu vẫn nằm phía trên lớp phủ. */
 body::before {
 	position: fixed;
 	inset: 0;
