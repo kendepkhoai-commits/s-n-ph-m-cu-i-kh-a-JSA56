@@ -1,0 +1,436 @@
+:root {
+	color-scheme: light;
+	--paper: #f5ecdc;
+	--ink: #382a20;
+	--muted: #786756;
+	--line: #ddcbb1;
+	--rust: #a8472d;
+	--gold: #c68d36;
+	--green: #486453;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body.information-page {
+	margin: 0;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+a {
+	color: inherit;
+}
+
+.info-header,
+.information-main,
+.info-footer {
+	width: min(calc(100% - 48px), 1160px);
+	margin-inline: auto;
+}
+
+.info-header {
+	min-height: 72px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid var(--line);
+}
+
+.back-link,
+.info-brand,
+.info-footer a {
+	font-size: 12px;
+	font-weight: 750;
+	text-decoration: none;
+}
+
+.back-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+}
+
+.back-link span {
+	font-size: 18px;
+}
+
+.info-brand,
+.info-footer a {
+	color: var(--rust);
+}
+
+.information-main {
+	padding-bottom: 76px;
+}
+
+.info-hero {
+	max-width: 850px;
+	padding: 76px 0 36px;
+}
+
+.info-eyebrow {
+	margin: 0 0 16px;
+	color: var(--rust);
+	font-size: 12px;
+	font-weight: 800;
+	letter-spacing: 1.2px;
+}
+
+.info-hero h1,
+.chart-heading h2,
+.insight-section h2,
+.method-note h2 {
+	font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+	font-weight: 500;
+}
+
+.info-hero h1 {
+	max-width: 790px;
+	margin: 0;
+	font-size: 64px;
+	line-height: 1.03;
+}
+
+.info-lead {
+	max-width: 700px;
+	margin: 22px 0 0;
+	color: var(--muted);
+	font-size: 15px;
+	line-height: 1.75;
+}
+
+.data-status,
+.data-error {
+	margin: 20px 0 0;
+	font-size: 12px;
+}
+
+.data-status {
+	color: var(--muted);
+}
+
+.data-error {
+	color: #9d2f20;
+}
+
+.summary-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	border-block: 1px solid var(--line);
+}
+
+.summary-item {
+	min-height: 150px;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 8px;
+	padding: 20px 22px;
+	border-right: 1px solid var(--line);
+}
+
+.summary-item:first-child {
+	padding-left: 0;
+}
+
+.summary-item:last-child {
+	border-right: 0;
+}
+
+.summary-item p,
+.summary-item span {
+	margin: 0;
+	color: var(--muted);
+	font-size: 11px;
+	line-height: 1.5;
+}
+
+.summary-item strong {
+	font: 600 27px/1.1 "Segoe UI", Tahoma, sans-serif;
+	font-variant-numeric: tabular-nums;
+}
+
+.summary-total strong {
+	color: var(--rust);
+	font-size: 32px;
+}
+
+.chart-section {
+	display: grid;
+	grid-template-columns: minmax(245px, .75fr) minmax(0, 1.25fr);
+	gap: 48px;
+	padding: 44px 0 48px;
+	border-bottom: 1px solid var(--line);
+}
+
+.chart-heading {
+	display: flex;
+	align-items: flex-start;
+	gap: 17px;
+}
+
+.chart-index {
+	padding-top: 7px;
+	color: var(--rust);
+	font-size: 11px;
+	font-weight: 800;
+}
+
+.chart-heading h2 {
+	margin: 0;
+	font-size: 27px;
+	line-height: 1.15;
+}
+
+.chart-heading p {
+	margin: 10px 0 0;
+	color: var(--muted);
+	font-size: 11px;
+	line-height: 1.5;
+}
+
+.bar-chart {
+	display: grid;
+	gap: 11px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.bar-row {
+	min-height: 22px;
+	display: grid;
+	grid-template-columns: minmax(120px, 1.1fr) minmax(90px, 1.5fr) minmax(76px, auto);
+	align-items: center;
+	gap: 12px;
+}
+
+.bar-country {
+	font-size: 11px;
+	line-height: 1.25;
+}
+
+.bar-country small {
+	display: block;
+	margin-top: 2px;
+	color: var(--muted);
+	font-size: 9px;
+}
+
+.bar-track {
+	height: 10px;
+	overflow: hidden;
+	background: #e7d9c4;
+}
+
+.bar-fill {
+	width: var(--bar-width);
+	height: 100%;
+	display: block;
+	background: var(--rust);
+}
+
+.bar-chart-population .bar-fill {
+	background: var(--gold);
+}
+
+.bar-chart-mortality .bar-fill {
+	background: var(--green);
+}
+
+.bar-value {
+	text-align: right;
+	font-size: 11px;
+	font-weight: 750;
+	font-variant-numeric: tabular-nums;
+}
+
+.empty-chart {
+	color: var(--muted);
+	font-size: 12px;
+}
+
+.insight-section {
+	margin-top: 72px;
+	padding: 36px clamp(24px, 6vw, 72px);
+	background: #713321;
+	color: white;
+}
+
+.insight-section .info-eyebrow {
+	color: #f0cf87;
+}
+
+.insight-section h2 {
+	margin: 0 0 22px;
+	font-size: 36px;
+}
+
+.insight-section > p:not(.info-eyebrow) {
+	max-width: 880px;
+	margin: 12px 0 0;
+	color: #f5e7d1;
+	font-size: 14px;
+	line-height: 1.65;
+}
+
+.method-note {
+	max-width: 850px;
+	padding-top: 54px;
+}
+
+.method-note h2 {
+	margin: 0 0 15px;
+	font-size: 25px;
+}
+
+.method-note p {
+	margin: 10px 0 0;
+	color: var(--muted);
+	font-size: 11px;
+	line-height: 1.7;
+}
+
+.source-links a {
+	color: var(--rust);
+	text-underline-offset: 3px;
+}
+
+.info-footer {
+	min-height: 68px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	border-top: 1px solid var(--line);
+	color: var(--muted);
+	font-size: 10px;
+}
+
+@media (max-width: 850px) {
+	.info-hero h1 {
+		font-size: 54px;
+	}
+
+	.summary-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.summary-item:nth-child(2) {
+		border-right: 0;
+	}
+
+	.summary-item:nth-child(3),
+	.summary-item:nth-child(4) {
+		border-top: 1px solid var(--line);
+	}
+
+	.summary-item:nth-child(3) {
+		padding-left: 0;
+	}
+
+	.chart-section {
+		grid-template-columns: 1fr;
+		gap: 24px;
+	}
+}
+
+@media (max-width: 560px) {
+	.info-header,
+	.information-main,
+	.info-footer {
+		width: calc(100% - 36px);
+	}
+
+	.info-header {
+		min-height: 62px;
+	}
+
+	.info-hero {
+		padding: 56px 0 28px;
+	}
+
+	.info-hero h1 {
+		font-size: 42px;
+	}
+
+	.info-lead {
+		font-size: 14px;
+	}
+
+	.summary-item {
+		min-height: 132px;
+		padding: 16px 12px;
+	}
+
+	.summary-item:first-child,
+	.summary-item:nth-child(3) {
+		padding-left: 0;
+	}
+
+	.summary-item strong {
+		font-size: 21px;
+	}
+
+	.summary-total strong {
+		font-size: 25px;
+	}
+
+	.chart-section {
+		gap: 19px;
+		padding: 32px 0;
+	}
+
+	.chart-heading h2 {
+		font-size: 24px;
+	}
+
+	.bar-chart {
+		gap: 13px;
+	}
+
+	.bar-row {
+		grid-template-columns: minmax(90px, 1fr) minmax(45px, .8fr) minmax(70px, auto);
+		gap: 8px;
+	}
+
+	.bar-country,
+	.bar-value {
+		font-size: 10px;
+	}
+
+	.bar-track {
+		height: 9px;
+	}
+
+	.insight-section {
+		margin-top: 48px;
+		padding: 28px 22px;
+	}
+
+	.insight-section h2 {
+		font-size: 30px;
+	}
+
+	.info-footer {
+		align-items: flex-start;
+		flex-direction: column;
+		justify-content: center;
+		gap: 6px;
+		padding: 15px 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}

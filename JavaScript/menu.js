@@ -1,10 +1,48 @@
 const accountName = document.querySelector("#account-name");
 const logoutButton = document.querySelector("#logout-button");
-const averageElement = document.querySelector("#africa-average");
-const countryCountElement = document.querySelector("#country-count");
-const dataYearElement = document.querySelector("#data-year");
-const countryList = document.querySelector("#country-list");
-const dataStatus = document.querySelector("#data-status");
+const navbarToggle = document.querySelector("#navbar-toggle");
+const siteHeader = document.querySelector("#site-header");
+const reasonImage = document.querySelector("#reason-image");
+const reasonLabel = document.querySelector("#reason-label");
+const reasonTitle = document.querySelector("#reason-title");
+const reasonDescription = document.querySelector("#reason-description");
+const reasonTabs = document.querySelectorAll(".reason-tab");
+
+function updateNavbarTogglePosition() {
+	const isHidden = document.body.classList.contains("navbar-hidden");
+	const top = isHidden ? 12 : siteHeader.getBoundingClientRect().bottom - 12;
+	navbarToggle.style.top = `${Math.max(12, top)}px`;
+}
+
+updateNavbarTogglePosition();
+window.addEventListener("resize", updateNavbarTogglePosition);
+window.addEventListener("scroll", updateNavbarTogglePosition, { passive: true });
+siteHeader.addEventListener("transitionend", event => {
+	if (event.propertyName === "transform") {
+		updateNavbarTogglePosition();
+	}
+});
+
+navbarToggle.addEventListener("click", () => {
+	const isHidden = document.body.classList.toggle("navbar-hidden");
+	const label = isHidden ? "Hiện thanh điều hướng" : "Ẩn thanh điều hướng";
+	navbarToggle.setAttribute("aria-expanded", String(!isHidden));
+	navbarToggle.setAttribute("aria-label", label);
+	navbarToggle.title = label;
+	navbarToggle.querySelector("span").textContent = isHidden ? "⌄" : "⌃";
+	updateNavbarTogglePosition();
+});
+
+reasonTabs.forEach(button => {
+	button.addEventListener("click", () => {
+		reasonTabs.forEach(tab => tab.setAttribute("aria-pressed", String(tab === button)));
+		reasonImage.src = button.dataset.image;
+		reasonImage.alt = button.dataset.alt;
+		reasonLabel.textContent = button.dataset.label;
+		reasonTitle.textContent = button.dataset.title;
+		reasonDescription.textContent = button.dataset.description;
+	});
+});
 
 let isAuthenticated = false;
 try {
@@ -24,7 +62,6 @@ if (!isAuthenticated || !account || typeof account.username !== "string") {
 	window.location.replace("login.html");
 } else {
 	accountName.textContent = account.username;
-	loadWaterAccessData();
 }
 
 logoutButton.addEventListener("click", () => {
@@ -35,36 +72,3 @@ logoutButton.addEventListener("click", () => {
 	}
 });
 
-async function loadWaterAccessData() {
-	try {
-		const countries = await window.getWaterAccessData();
-		if (countries.length === 0) {
-			throw new Error("Chưa có dữ liệu nước uống cho các quốc gia châu Phi.");
-		}
-
-		// Mỗi nước chỉ có một quan sát mới nhất; đây là trung bình không trọng số theo dân số.
-		const average = countries.reduce((total, item) => total + item.value, 0) / countries.length;
-		const years = countries.map(item => Number(item.date)).filter(Number.isFinite);
-		averageElement.textContent = `${average.toLocaleString("vi-VN", { maximumFractionDigits: 1 })}%`;
-		countryCountElement.textContent = `${countries.length} quốc gia có dữ liệu`;
-		dataYearElement.textContent = years.length ? `Năm mới nhất: ${Math.max(...years)}` : "Chưa rõ năm dữ liệu";
-		dataStatus.textContent = "";
-
-		countries
-			.sort((first, second) => first.value - second.value)
-			.slice(0, 5)
-			.forEach(item => {
-				const row = document.createElement("li");
-				const country = document.createElement("span");
-				const value = document.createElement("strong");
-				country.textContent = item.country.value;
-				value.textContent = `${item.value.toLocaleString("vi-VN", { maximumFractionDigits: 1 })}%`;
-				row.append(country, value);
-				countryList.append(row);
-			});
-	} catch (error) {
-		averageElement.textContent = "Chưa có dữ liệu";
-		countryCountElement.textContent = "Không thể tải dữ liệu lúc này";
-		dataStatus.textContent = error.message;
-	}
-}

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5ecdc">
+  <title>Thống kê nước sạch | Water for Africa</title>
+  <link rel="stylesheet" href="../CSS/information.css">
+  <script src="fetch.js" defer></script>
+  <script src="information.js" defer></script>
+</head>
+<body class="information-page">
+  <header class="info-header">
+    <a class="back-link" href="menu.html"><span aria-hidden="true">←</span> Trang menu</a>
+    <a class="info-brand" href="menu.html">waterforafrica</a>
+  </header>
+
+  <main class="information-main">
+    <section class="info-hero" aria-labelledby="info-title">
+      <p class="info-eyebrow">DỮ LIỆU · CHÂU PHI · NƯỚC SẠCH</p>
+      <h1 id="info-title">Khi thiếu nước, cả cộng đồng chịu ảnh hưởng.</h1>
+      <p class="info-lead">Các số liệu dưới đây cho thấy khoảng cách tiếp cận nước uống cơ bản và tử vong liên quan đến dịch vụ nước sạch, vệ sinh môi trường và vệ sinh cá nhân không an toàn.</p>
+      <p id="data-status" class="data-status" role="status" aria-live="polite">Đang tải dữ liệu từ Ngân hàng Thế giới...</p>
+      <p id="data-error" class="data-error" role="alert" hidden></p>
+    </section>
+
+    <section class="summary-grid" aria-label="Điểm đáng chú ý">
+      <article class="summary-item summary-total">
+        <p>Ước tính chưa tiếp cận nước cơ bản</p>
+        <strong id="summary-total">Đang tải</strong>
+        <span id="summary-coverage">người ước tính · năm 2024</span>
+      </article>
+      <article class="summary-item">
+        <p>Tỷ lệ chưa tiếp cận cao nhất</p>
+        <strong id="summary-highest-rate">Đang tải</strong>
+        <span id="summary-highest-rate-country">Đang tổng hợp quốc gia</span>
+      </article>
+      <article class="summary-item">
+        <p>Số người ước tính cao nhất</p>
+        <strong id="summary-highest-count">Đang tải</strong>
+        <span id="summary-highest-count-country">Đang tổng hợp quốc gia</span>
+      </article>
+      <article class="summary-item">
+        <p>Tỷ lệ tử vong cao nhất do dịch vụ nước và vệ sinh không an toàn</p>
+        <strong id="summary-highest-mortality">Đang tải</strong>
+        <span id="summary-highest-mortality-country">Đang tổng hợp quốc gia</span>
+      </article>
+    </section>
+
+    <section class="chart-section" aria-labelledby="access-title">
+      <div class="chart-heading">
+        <span class="chart-index">01</span>
+        <div>
+          <h2 id="access-title">Tỷ lệ dân số chưa tiếp cận</h2>
+          <p>Dịch vụ nước uống cơ bản · <span id="access-year">2024</span></p>
+        </div>
+      </div>
+      <ol id="access-chart" class="bar-chart" aria-label="Mười quốc gia có tỷ lệ dân số chưa tiếp cận nước uống cơ bản cao nhất"></ol>
+    </section>
+
+    <section class="chart-section" aria-labelledby="population-title">
+      <div class="chart-heading">
+        <span class="chart-index">02</span>
+        <div>
+          <h2 id="population-title">Số người ước tính chưa tiếp cận</h2>
+          <p>Dân số nhân với tỷ lệ chưa tiếp cận · <span id="population-year">2024</span></p>
+        </div>
+      </div>
+      <ol id="population-chart" class="bar-chart bar-chart-population" aria-label="Mười quốc gia có số người chưa tiếp cận nước uống cơ bản ước tính cao nhất"></ol>
+    </section>
+
+    <section class="chart-section" aria-labelledby="mortality-title">
+      <div class="chart-heading">
+        <span class="chart-index">03</span>
+        <div>
+          <h2 id="mortality-title">Tử vong liên quan đến dịch vụ nước và vệ sinh không an toàn</h2>
+          <p>Số ca trên 100.000 dân · năm mới nhất theo từng quốc gia</p>
+        </div>
+      </div>
+      <ol id="mortality-chart" class="bar-chart bar-chart-mortality" aria-label="Mười quốc gia có tỷ lệ tử vong liên quan đến dịch vụ nước, vệ sinh môi trường và vệ sinh cá nhân không an toàn cao nhất"></ol>
+    </section>
+
+    <section class="insight-section" aria-labelledby="insight-title">
+      <p class="info-eyebrow">ĐỌC TỪ DỮ LIỆU</p>
+      <h2 id="insight-title">Điều các con số cho thấy</h2>
+      <p id="insight-population">Đang tổng hợp ước tính số người chưa tiếp cận nước uống cơ bản.</p>
+      <p id="insight-rate">Đang tổng hợp tỷ lệ tiếp cận theo quốc gia.</p>
+      <p id="insight-mortality">Đang tổng hợp tỷ lệ tử vong liên quan đến dịch vụ nước và vệ sinh không an toàn.</p>
+    </section>
+
+    <section class="method-note" aria-labelledby="method-title">
+      <h2 id="method-title">Phạm vi và cách đọc</h2>
+      <p>Ước tính số người chưa tiếp cận được tính bằng dân số nhân với phần trăm dân số chưa sử dụng dịch vụ nước uống cơ bản; chỉ tính các quốc gia có đủ cả hai dữ liệu trong năm 2024. Đây không phải số người hoàn toàn không có nước.</p>
+      <p>Chỉ số tử vong này là số ca tử vong liên quan đến dịch vụ nước, vệ sinh môi trường và vệ sinh cá nhân không an toàn trên 100.000 dân. Chỉ số này không phải số ca mắc bệnh tiêu hóa; năm dữ liệu có thể khác nhau giữa các quốc gia và được ghi cạnh từng cột.</p>
+      <p class="source-links">Nguồn: <a href="https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&amp;date=2024%3A2024&amp;per_page=300" target="_blank" rel="noreferrer">Dân số</a> · <a href="https://api.worldbank.org/v2/country/all/indicator/SH.H2O.BASW.ZS?format=json&amp;date=2024%3A2024&amp;per_page=300" target="_blank" rel="noreferrer">Tiếp cận nước uống cơ bản</a> · <a href="https://api.worldbank.org/v2/country/all/indicator/SH.STA.WASH.P5?format=json&amp;mrnev=1&amp;per_page=300" target="_blank" rel="noreferrer">Tử vong do dịch vụ nước và vệ sinh không an toàn</a> (Ngân hàng Thế giới).</p>
+    </section>
+  </main>
+
+  <footer class="info-footer"><a href="menu.html">waterforafrica</a><span>Dữ liệu được truy vấn trực tiếp từ API của Ngân hàng Thế giới.</span></footer>
+</body>
+</html>

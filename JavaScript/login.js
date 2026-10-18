@@ -16,7 +16,7 @@ loginForm.addEventListener("submit", (event) => {
 	const email = loginForm.email.value.trim();
 	const password = loginForm.password.value;
 	if (!email || !password) {
-		showMessage("Vui lòng nhập email và mật khẩu.");
+		showMessage("Vui lòng nhập địa chỉ email và mật khẩu.");
 		return;
 	}
 
@@ -46,9 +46,9 @@ loginForm.addEventListener("submit", (event) => {
 		return;
 	}
 
-	// Email không phân biệt chữ hoa/thường; mật khẩu thì phải khớp chính xác.
+	// Địa chỉ email không phân biệt chữ hoa/thường; mật khẩu phải khớp chính xác.
 	if (email.toLowerCase() !== account.email.toLowerCase() || password !== account.password) {
-		showMessage("Email hoặc mật khẩu không chính xác.");
+		showMessage("Địa chỉ email hoặc mật khẩu không chính xác.");
 		return;
 	}
 

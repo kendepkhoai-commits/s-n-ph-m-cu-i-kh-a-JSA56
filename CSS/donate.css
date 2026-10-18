@@ -1,0 +1,461 @@
+:root {
+	color-scheme: light;
+	--paper: #f5ecdc;
+	--ink: #382a20;
+	--muted: #786756;
+	--line: #ddcbb1;
+	--rust: #a8472d;
+	--gold: #c68d36;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body.donate-page {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+a {
+	color: inherit;
+}
+
+.donate-header,
+.donate-main,
+.donate-footer {
+	width: min(calc(100% - 48px), 1120px);
+	margin-inline: auto;
+}
+
+.donate-header {
+	min-height: 72px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid var(--line);
+}
+
+.back-link,
+.donate-brand,
+.donate-footer a {
+	font-size: 12px;
+	font-weight: 750;
+	text-decoration: none;
+}
+
+.back-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 9px;
+}
+
+.back-link span {
+	font-size: 18px;
+}
+
+.donate-brand,
+.donate-footer a {
+	color: var(--rust);
+}
+
+.donate-main {
+	flex: 1;
+	padding: 62px 0 78px;
+}
+
+.donate-intro {
+	max-width: 720px;
+	margin-bottom: 34px;
+}
+
+.donate-eyebrow {
+	margin: 0 0 14px;
+	color: var(--rust);
+	font-size: 12px;
+	font-weight: 800;
+	letter-spacing: 1.2px;
+}
+
+.donate-intro h1 {
+	margin: 0;
+	font: 600 52px/1.05 "Segoe UI", Tahoma, sans-serif;
+}
+
+.donate-intro > p:last-child {
+	margin: 15px 0 0;
+	color: var(--muted);
+	font-size: 15px;
+	line-height: 1.6;
+}
+
+.donate-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(280px, .8fr);
+	align-items: start;
+	gap: 56px;
+	border-top: 1px solid var(--line);
+	padding-top: 30px;
+}
+
+.donation-form {
+	max-width: 610px;
+}
+
+.choice-group {
+	min-width: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.choice-group + .choice-group {
+	margin-top: 28px;
+}
+
+.choice-group legend {
+	margin-bottom: 14px;
+	font-size: 14px;
+	font-weight: 750;
+}
+
+.frequency-options {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.frequency-option,
+.amount-option {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid var(--line);
+	background: #fffaf2;
+	color: var(--ink);
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 700;
+	transition: border-color 140ms ease, background-color 140ms ease, color 140ms ease;
+}
+
+.frequency-option {
+	min-height: 48px;
+}
+
+.frequency-option input,
+.amount-option input {
+	position: absolute;
+	op: 0;
+	left: 0;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+
+.frequency-option:has(input:checked),
+.amount-option:has(input:checked) {
+	border-color: var(--rust);
+	background: #f3dfc7;
+	color: #713321;
+}
+
+.frequency-option:has(input:focus-visible),
+.amount-option:has(input:focus-visible) {
+	outline: 3px solid var(--gold);
+	outline-offset: 2px;
+}
+
+.amount-options {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.amount-option {
+	min-height: 52px;
+}
+
+.custom-amount-label {
+	display: block;
+	margin: 16px 0 7px;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.custom-amount-input {
+	width: 100%;
+	min-height: 46px;
+	padding: 0 12px;
+	border: 1px solid var(--line);
+	background: #fffaf2;
+	color: var(--ink);
+	font: inherit;
+}
+
+.custom-amount-input:focus-visible {
+	outline: 3px solid var(--gold);
+	outline-offset: 2px;
+}
+
+[hidden] {
+	display: none !important;
+}
+
+.donation-error {
+	margin: 18px 0 0;
+	color: #9d2f20;
+	font-size: 12px;
+}
+
+.continue-button {
+	min-height: 50px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
+	margin-top: 26px;
+	padding: 0 19px;
+	border: 0;
+	background: var(--rust);
+	color: white;
+	cursor: pointer;
+	font: 750 13px "Segoe UI", Tahoma, sans-serif;
+	text-decoration: none;
+}
+
+.continue-button:hover,
+.payment-submit:hover {
+	background: #713321;
+}
+
+.secure-note {
+	color: var(--muted);
+	font-size: 11px;
+	line-height: 1.65;
+}
+
+.secure-note {
+	max-width: 410px;
+	margin: 14px 0 0;
+}
+
+.donation-summary {
+	padding: 24px 26px;
+	border: 1px solid var(--line);
+	background: #fffaf2;
+}
+
+.donation-summary h2 {
+	margin: 0;
+	font: 500 25px/1.15 "Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+
+.summary-amount {
+	margin: 17px 0 4px;
+	color: var(--rust);
+	font-size: 28px;
+	font-weight: 750;
+}
+
+.summary-frequency {
+	margin: 0;
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.demo-notice {
+	display: grid;
+	gap: 5px;
+	margin-top: 20px;
+	padding: 13px 15px;
+	border-left: 3px solid var(--gold);
+	background: #f3e4c8;
+	color: #5b4633;
+	font-size: 11px;
+	line-height: 1.55;
+}
+
+.demo-notice strong {
+	font-size: 12px;
+}
+
+.payment-form {
+	margin-top: 20px;
+}
+
+.payment-fields {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 14px 12px;
+}
+
+.payment-field {
+	min-width: 0;
+	display: grid;
+	align-content: start;
+	gap: 6px;
+}
+
+.payment-field-wide {
+	grid-column: 1 / -1;
+}
+
+.payment-field label {
+	font-size: 11px;
+	font-weight: 700;
+}
+
+.payment-field input {
+	width: 100%;
+	min-height: 42px;
+	padding: 0 11px;
+	border: 1px solid var(--line);
+	background: #fffdf9;
+	color: var(--ink);
+	font: 13px "Segoe UI", Tahoma, sans-serif;
+}
+
+.payment-field input:focus-visible {
+	outline: 3px solid var(--gold);
+	outline-offset: 2px;
+}
+
+.demo-card-hint {
+	margin: 12px 0 0;
+	color: var(--muted);
+	font-size: 10px;
+	line-height: 1.5;
+}
+
+.test-data-button {
+	margin-top: 10px;
+	padding: 7px 0;
+	border: 0;
+	background: transparent;
+	color: var(--rust);
+	cursor: pointer;
+	font: 700 11px "Segoe UI", Tahoma, sans-serif;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.payment-submit {
+	min-height: 46px;
+	display: inline-flex;
+	align-items: center;
+	gap: 16px;
+	margin-top: 15px;
+	padding: 0 15px;
+	border: 0;
+	background: var(--rust);
+	color: white;
+	cursor: pointer;
+	font: 750 12px "Segoe UI", Tahoma, sans-serif;
+}
+
+.demo-success {
+	margin-top: 20px;
+	padding: 15px;
+	background: #e1ebdb;
+	color: #334b37;
+	font-size: 12px;
+	line-height: 1.55;
+}
+
+.demo-success p {
+	margin: 5px 0 0;
+}
+
+.edit-button {
+	display: block;
+	margin-top: 14px;
+	padding: 8px 0;
+	border: 0;
+	background: transparent;
+	color: var(--rust);
+	cursor: pointer;
+	font: 700 12px "Segoe UI", Tahoma, sans-serif;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.donate-footer {
+	min-height: 68px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	border-top: 1px solid var(--line);
+	color: var(--muted);
+	font-size: 10px;
+}
+
+@media (max-width: 760px) {
+	.donate-main {
+		padding: 48px 0 58px;
+	}
+
+	.donate-intro h1 {
+		font-size: 42px;
+	}
+
+	.donate-layout {
+		grid-template-columns: 1fr;
+		gap: 32px;
+	}
+
+	.donation-summary {
+		max-width: 610px;
+	}
+}
+
+@media (max-width: 480px) {
+	.donate-header,
+	.donate-main,
+	.donate-footer {
+		width: calc(100% - 36px);
+	}
+
+	.donate-header {
+		min-height: 62px;
+	}
+
+	.donate-intro h1 {
+		font-size: 36px;
+	}
+
+	.amount-options {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.payment-fields {
+		grid-template-columns: 1fr;
+	}
+
+	.payment-field-wide {
+		grid-column: auto;
+	}
+
+	.donate-footer {
+		align-items: flex-start;
+		flex-direction: column;
+		justify-content: center;
+		gap: 6px;
+		padding: 15px 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition: none !important;
+	}
+}

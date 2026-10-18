@@ -19,7 +19,7 @@ registerForm.addEventListener("submit", (event) => {
 		return;
 	}
 	if (!/^[^\s@]+@gmail\.com$/i.test(email)) {
-		showMessage("Email phải có định dạng và kết thúc bằng @gmail.com.");
+		showMessage("Địa chỉ email phải có định dạng hợp lệ và kết thúc bằng @gmail.com.");
 		return;
 	}
 

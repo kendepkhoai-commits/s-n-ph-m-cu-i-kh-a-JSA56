@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#173f39">
   <title>Water for Africa | Nước sạch cho mọi người</title>
-  <link rel="stylesheet" href="../CSS/menu.css?v=2">
-  <script src="fetch.js" defer></script>
+  <link rel="stylesheet" href="../CSS/menu.css?v=3">
   <script src="menu.js" defer></script>
 </head>
 <body class="menu-page">
-  <header class="site-header">
+  <button id="navbar-toggle" class="navbar-toggle" type="button" aria-controls="site-header" aria-expanded="true" aria-label="Ẩn thanh điều hướng" title="Ẩn thanh điều hướng"><span aria-hidden="true">⌃</span></button>
+  <header class="site-header" id="site-header">
     <a class="brand" href="#home" aria-label="Water for Africa, về đầu trang">
       <span class="brand-mark" aria-hidden="true">W</span>
       <span class="brand-copy"><strong>waterforafrica</strong><small>1 giọt nước trong, 1 tương lai sáng</small></span>
     </a>
     <nav class="main-nav" aria-label="Điều hướng chính">
-      <a href="#impact">Số liệu</a>
-      <a href="#about">About us</a>
-      <a class="donate-link" href="#donate">Donate <span aria-hidden="true">↗</span></a>
+      <a href="information.html">Số liệu</a>
+      <a href="#about">Về chúng tôi</a>
+      <a class="donate-link" href="donate.html">Ủng hộ <span aria-hidden="true">↗</span></a>
     </nav>
     <div class="account-tools">
       <span class="account-greeting">Xin chào, <strong id="account-name"></strong></span>
@@ -31,33 +31,57 @@
       <p class="eyebrow">NƯỚC SẠCH · SỨC KHỎE · TƯƠNG LAI</p>
       <h1 id="hero-title">Nước sạch không nên là điều xa xỉ.</h1>
       <p class="hero-copy">Cùng nâng cao nhận thức và tiếp sức cho những cộng đồng đang cần nguồn nước an toàn hơn.</p>
-      <a class="hero-action" href="#impact">Khám phá dữ liệu <span aria-hidden="true">↓</span></a>
       <p class="hero-caption">Một hành trình mỗi ngày của hàng triệu người để tìm nước.</p>
     </section>
 
-    <section class="impact-section" id="impact" aria-labelledby="impact-title">
-      <div class="section-heading">
-        <p class="eyebrow">BỨC TRANH NGUỒN NƯỚC</p>
-        <h2 id="impact-title">Tiếp cận nước uống cơ bản</h2>
-        <p>Số liệu mới nhất có sẵn theo từng quốc gia từ World Bank.</p>
+    <section class="why-water-intro" aria-labelledby="why-water-title">
+      <div>
+        <p class="eyebrow">ĐIỀU CỐT YẾU</p>
+        <h2 id="why-water-title">Vì sao là nước?</h2>
       </div>
+      <p>Nước là nền tảng của sự sống. Nước sạch giúp con người khỏe mạnh, học tập, làm việc và xây dựng tương lai cho cộng đồng.</p>
+    </section>
 
-      <div class="impact-layout">
-        <div class="impact-summary" aria-live="polite">
-          <span class="summary-label">Trung bình các quốc gia châu Phi có dữ liệu</span>
-          <strong id="africa-average" class="summary-number">Đang tải...</strong>
-          <span class="summary-footnote">dân số sử dụng dịch vụ nước uống cơ bản</span>
-          <div class="summary-meta"><span id="country-count">Đang tải dữ liệu quốc gia</span><span id="data-year"></span></div>
-        </div>
-
-        <div class="country-data">
-          <div class="country-heading"><h3>Tỷ lệ tiếp cận thấp nhất</h3><span>% dân số</span></div>
-          <div id="data-status" class="data-status" role="status">Đang kết nối World Bank...</div>
-          <ol id="country-list" class="country-list"></ol>
-        </div>
+    <section class="reason-showcase" aria-label="Nước sạch tạo nên thay đổi trong nhiều lĩnh vực">
+      <img id="reason-image" class="reason-image" src="../Image/menuhealth.webp" alt="Người phụ nữ lấy nước sạch từ vòi" fetchpriority="low">
+      <div class="reason-tabs" aria-label="Chọn lĩnh vực">
+        <button class="reason-tab" type="button" aria-pressed="true" data-image="../Image/menuhealth.webp" data-alt="Người phụ nữ lấy nước sạch từ vòi" data-label="SỨC KHỎE" data-title="Sức khỏe bắt đầu từ nước sạch" data-description="Nước an toàn giúp duy trì sức khỏe, vệ sinh cá nhân và giảm nguy cơ mắc các bệnh lây truyền qua nguồn nước.">Sức khỏe</button>
+        <button class="reason-tab" type="button" aria-pressed="false" data-image="../Image/menuedutcation.webp" data-alt="Học sinh đang học trong lớp học" data-label="GIÁO DỤC" data-title="Nước sạch mở đường đến trường" data-description="Khi trường học có nước uống và nhà vệ sinh an toàn, học sinh có môi trường tốt hơn để chuyên tâm học tập và đến lớp đều đặn.">Giáo dục</button>
+        <button class="reason-tab" type="button" aria-pressed="false" data-image="../Image/menuwomen.jpg" data-alt="Hai phụ nữ lấy nước bên bờ sông" data-label="PHỤ NỮ" data-title="Nước gần hơn, thêm cơ hội cho phụ nữ" data-description="Nguồn nước an toàn gần nhà giúp giảm thời gian đi lấy nước, để phụ nữ và trẻ em gái có thêm thời gian cho học tập, công việc và gia đình.">Phụ nữ</button>
+        <button class="reason-tab" type="button" aria-pressed="false" data-image="../Image/menueconomicgrowth.webp" data-alt="Người nông dân làm việc trên cánh đồng rau" data-label="TĂNG TRƯỞNG KINH TẾ" data-title="Nước nuôi dưỡng sinh kế" data-description="Nước sạch và ổn định hỗ trợ nông nghiệp, hoạt động kinh doanh và sức khỏe người lao động, góp phần tạo sinh kế bền vững.">Tăng trưởng kinh tế</button>
       </div>
-      <p class="data-note">Lưu ý: API hiện dùng chỉ số tiếp cận nước uống cơ bản (SH.H2O.BASW.ZS), không cung cấp tỷ lệ mắc tiêu chảy. Chỉ số này phản ánh điều kiện tiếp cận nước, không thể thay thế dữ liệu y tế hoặc chứng minh nguyên nhân bệnh.</p>
-      <a class="source-link" href="https://api.worldbank.org/v2/country/all/indicator/SH.H2O.BASW.ZS?format=json&amp;mrnev=1&amp;per_page=300" target="_blank" rel="noreferrer">Nguồn dữ liệu: World Bank API <span aria-hidden="true">↗</span></a>
+      <div class="reason-panel" aria-live="polite">
+        <p id="reason-label" class="reason-label">SỨC KHỎE</p>
+        <h3 id="reason-title">Sức khỏe bắt đầu từ nước sạch</h3>
+        <p id="reason-description">Nước an toàn giúp duy trì sức khỏe, vệ sinh cá nhân và giảm nguy cơ mắc các bệnh lây truyền qua nguồn nước.</p>
+      </div>
+    </section>
+
+    <section class="fact-section" id="impact" aria-labelledby="fact-title">
+      <div class="fact-copy">
+        <p class="fact-kicker">BẠN CÓ BIẾT?</p>
+        <h2 id="fact-title">Năm 2024, ước tính khoảng <strong>426 triệu người</strong> tại châu Phi chưa tiếp cận dịch vụ nước uống cơ bản.</h2>
+        <p>Con số được ước tính từ dân số và tỷ lệ tiếp cận nước uống cơ bản của Ngân hàng Thế giới tại 51 quốc gia có đủ dữ liệu. Nguồn nước không an toàn làm tăng nguy cơ bệnh tật, nhưng dữ liệu hiện có không xác định số người vừa thiếu nước vừa mắc bệnh tiêu hóa.</p>
+        <a class="fact-link" href="information.html">Tìm hiểu thêm <span aria-hidden="true">↗</span></a>
+      </div>
+      <span class="fact-year" aria-hidden="true">2024</span>
+    </section>
+
+    <section class="video-section" aria-labelledby="video-title">
+      <p class="eyebrow">PHÓNG SỰ · TRUYỀN HÌNH ĐỒNG THÁP</p>
+      <h2 id="video-title">Trẻ em trước nguy cơ thiếu nước sạch</h2>
+      <div class="video-frame">
+        <iframe src="https://www.youtube-nocookie.com/embed/-OM2p0L4djM?hl=vi" title="Liên Hiệp Quốc cảnh báo tình trạng trẻ em thiếu nước sạch" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <a class="video-fallback" href="https://www.youtube.com/watch?v=-OM2p0L4djM" target="_blank" rel="noreferrer">Nếu video không phát, mở trực tiếp trên YouTube <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <section class="donate-section" id="donate" aria-labelledby="donate-title">
+      <div>
+        <p class="eyebrow">CHUNG TAY TẠO THAY ĐỔI</p>
+        <h2 id="donate-title">Mỗi đóng góp đều có thể mở ra một khởi đầu mới.</h2>
+      </div>
+      <a class="donate-button" href="donate.html">Ủng hộ nước sạch <span aria-hidden="true">↗</span></a>
     </section>
 
     <section class="about-section" id="about" aria-labelledby="about-title">
@@ -67,14 +91,6 @@
         <p>Water for Africa là dự án nâng cao nhận thức về khả năng tiếp cận nước sạch và những ảnh hưởng của nguồn nước không an toàn đến sức khỏe cộng đồng. Chúng tôi chia sẻ dữ liệu đáng tin cậy để câu chuyện này được nhìn thấy rõ hơn.</p>
       </div>
       <div class="about-statement">Nước sạch là nền tảng của sức khỏe.</div>
-    </section>
-
-    <section class="donate-section" id="donate" aria-labelledby="donate-title">
-      <div>
-        <p class="eyebrow">CHUNG TAY TẠO THAY ĐỔI</p>
-        <h2 id="donate-title">Mỗi đóng góp đều có thể mở ra một khởi đầu mới.</h2>
-      </div>
-      <a class="donate-button" href="https://water.org/donate/" target="_blank" rel="noreferrer">Ủng hộ nước sạch <span aria-hidden="true">↗</span></a>
     </section>
   </main>
 

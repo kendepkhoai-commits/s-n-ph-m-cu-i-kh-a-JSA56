@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5ecdc">
+  <title>Ủng hộ nước sạch | Water for Africa</title>
+  <link rel="stylesheet" href="../CSS/donate.css">
+  <script src="donate.js" defer></script>
+</head>
+<body class="donate-page">
+  <header class="donate-header">
+    <a class="back-link" href="menu.html"><span aria-hidden="true">←</span> Quay lại trang chính</a>
+    <a class="donate-brand" href="menu.html">waterforafrica</a>
+  </header>
+
+  <main class="donate-main">
+    <section class="donate-intro" aria-labelledby="donate-title">
+      <p class="donate-eyebrow">CHUNG TAY VÌ NƯỚC SẠCH</p>
+      <h1 id="donate-title">Mỗi đóng góp mở ra thêm cơ hội.</h1>
+      <p>Chọn mức đóng góp và hình thức ủng hộ phù hợp với bạn.</p>
+    </section>
+
+    <div class="donate-layout">
+      <form id="donation-form" class="donation-form" novalidate>
+        <fieldset class="choice-group">
+          <legend>Hình thức ủng hộ</legend>
+          <div class="frequency-options">
+            <label class="frequency-option">
+              <input type="radio" name="frequency" value="once" checked>
+              <span>Một lần</span>
+            </label>
+            <label class="frequency-option">
+              <input type="radio" name="frequency" value="monthly">
+              <span>Hàng tháng</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="choice-group">
+          <legend>Mức đóng góp (USD)</legend>
+          <div class="amount-options">
+            <label class="amount-option"><input type="radio" name="amount" value="10"><span>10 USD</span></label>
+            <label class="amount-option"><input type="radio" name="amount" value="25" checked><span>25 USD</span></label>
+            <label class="amount-option"><input type="radio" name="amount" value="50"><span>50 USD</span></label>
+            <label class="amount-option"><input type="radio" name="amount" value="100"><span>100 USD</span></label>
+            <label class="amount-option amount-custom"><input type="radio" name="amount" value="custom"><span>Tùy chọn</span></label>
+          </div>
+          <label id="custom-amount-label" class="custom-amount-label" for="custom-amount" hidden>Số tiền tùy chọn (USD)</label>
+          <input id="custom-amount" class="custom-amount-input" type="number" min="1" max="1000000" step="1" inputmode="numeric" placeholder="Nhập số tiền" hidden>
+        </fieldset>
+
+        <p id="donation-error" class="donation-error" role="alert" hidden></p>
+        <button class="continue-button" type="submit">Tiếp tục <span aria-hidden="true">→</span></button>
+        <p class="secure-note">Chỉ dùng thẻ thử; không nhập thẻ thật. Dữ liệu mô phỏng không được gửi hoặc lưu.</p>
+      </form>
+
+      <section id="donation-summary" class="donation-summary" aria-labelledby="summary-title" aria-live="polite" tabindex="-1" hidden>
+        <p class="donate-eyebrow">TÓM TẮT LỰA CHỌN</p>
+        <h2 id="summary-title">Bạn đã chọn</h2>
+        <p class="summary-amount" id="summary-amount"></p>
+        <p class="summary-frequency" id="summary-frequency"></p>
+        <div class="demo-notice" role="note">
+          <strong>Chế độ mô phỏng</strong>
+          <span>Không có khoản tiền thật nào được trừ. Chỉ dùng dữ liệu thẻ thử, tuyệt đối không nhập thông tin thẻ đang sử dụng.</span>
+        </div>
+        <form id="payment-form" class="payment-form" novalidate>
+          <div class="payment-fields">
+            <div class="payment-field payment-field-wide">
+              <label for="donor-name">Họ và tên chủ thẻ</label>
+              <input id="donor-name" type="text" autocomplete="off" placeholder="Nguyễn Văn A" required>
+            </div>
+            <div class="payment-field payment-field-wide">
+              <label for="donor-email">Địa chỉ email</label>
+              <input id="donor-email" type="email" autocomplete="off" placeholder="ban@example.com" required>
+            </div>
+            <div class="payment-field payment-field-wide">
+              <label for="card-number">Số thẻ thử</label>
+              <input id="card-number" type="text" inputmode="numeric" autocomplete="off" maxlength="19" placeholder="4242 4242 4242 4242" required>
+            </div>
+            <div class="payment-field">
+              <label for="card-expiry">Ngày hết hạn</label>
+              <input id="card-expiry" type="text" inputmode="numeric" autocomplete="off" maxlength="5" placeholder="12/30" required>
+            </div>
+            <div class="payment-field">
+              <label for="card-cvc">Mã bảo mật CVC</label>
+              <input id="card-cvc" type="password" inputmode="numeric" autocomplete="off" maxlength="3" placeholder="123" required>
+            </div>
+          </div>
+          <p class="demo-card-hint">Dữ liệu thử: <strong>4242 4242 4242 4242</strong> · hạn <strong>12/30</strong> · CVC <strong>123</strong></p>
+          <button id="fill-test-data" class="test-data-button" type="button">Điền dữ liệu thử</button>
+          <p id="payment-error" class="donation-error" role="alert" hidden></p>
+          <button class="payment-submit" type="submit">Mô phỏng quyên góp <span aria-hidden="true">→</span></button>
+        </form>
+        <section id="demo-success" class="demo-success" role="status" aria-live="polite" tabindex="-1" hidden>
+          <strong>Mô phỏng hoàn tất</strong>
+          <p>Không có giao dịch thật nào được thực hiện và thông tin thẻ đã được xóa khỏi biểu mẫu.</p>
+        </section>
+        <button id="edit-donation" class="edit-button" type="button">Thay đổi lựa chọn</button>
+      </section>
+    </div>
+  </main>
+
+  <footer class="donate-footer"><a href="menu.html">waterforafrica</a><span>Đây chỉ là mô phỏng; không có tiền thật bị trừ.</span></footer>
+</body>
+</html>
