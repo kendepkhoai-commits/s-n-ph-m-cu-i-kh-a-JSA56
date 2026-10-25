@@ -31,6 +31,7 @@ a {
 }
 
 .site-header {
+	/* Thanh điều hướng nổi khi cuộn; khoảng âm bù lại khoảng trống của phần tử sticky. */
 	position: sticky;
 	top: 12px;
 	z-index: 5;
@@ -704,6 +705,7 @@ body.navbar-hidden .site-header {
 }
 
 @media (max-width: 900px) {
+	/* Giảm cỡ chữ và khoảng cách của nội dung khi chiều ngang bị giới hạn. */
 	.hero h1 {
 		font-size: 70px;
 	}
@@ -769,6 +771,7 @@ body.navbar-hidden .site-header {
 }
 
 @media (max-width: 640px) {
+	/* Xếp các khu vực nội dung theo một cột trên điện thoại. */
 	html {
 		scroll-padding-top: 126px;
 	}
@@ -993,6 +996,7 @@ body.navbar-hidden .site-header {
 }
 
 @media (prefers-reduced-motion: reduce) {
+	/* Tắt chuyển động của thanh điều hướng nếu người dùng yêu cầu giảm hiệu ứng. */
 	html {
 		scroll-behavior: auto;
 	}

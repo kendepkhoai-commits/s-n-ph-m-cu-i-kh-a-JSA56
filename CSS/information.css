@@ -316,6 +316,7 @@ a {
 }
 
 @media (max-width: 850px) {
+	/* Trên tablet, chuyển các chỉ số thành hai cột và đưa biểu đồ xuống dưới tiêu đề. */
 	.info-hero h1 {
 		font-size: 54px;
 	}
@@ -344,6 +345,7 @@ a {
 }
 
 @media (max-width: 560px) {
+	/* Trên điện thoại, giảm khoảng lề và nén nhãn/cột biểu đồ để tránh tràn ngang. */
 	.info-header,
 	.information-main,
 	.info-footer {

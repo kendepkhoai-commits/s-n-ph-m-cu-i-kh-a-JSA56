@@ -23,8 +23,9 @@ registerForm.addEventListener("submit", (event) => {
 		return;
 	}
 
-	// Nhóm Unicode giúp chữ có dấu không bị tính nhầm là ký tự đặc biệt.
+	// Nhóm Unicode cho phép phân biệt chữ/số ở mọi ngôn ngữ với ký tự đặc biệt.
 	const hasSpecialCharacter = /[^\p{L}\p{N}\s]/u.test(password);
+	// Duyệt theo code point để ký tự Unicode ghép được đếm như một ký tự hiển thị.
 	const characterCount = [...password].length;
 	if (characterCount <= 8 || !hasSpecialCharacter) {
 		showMessage("Mật khẩu cần trên 8 ký tự và có ít nhất 1 ký tự đặc biệt.");
@@ -36,7 +37,7 @@ registerForm.addEventListener("submit", (event) => {
 	}
 
 	try {
-		// Bản demo lưu mật khẩu dạng rõ trong trình duyệt; không dùng cách này cho xác thực thật.
+		// Đây là bản demo lưu mật khẩu dạng rõ trong trình duyệt, không dùng cho xác thực thật.
 		localStorage.setItem("waterAidAccount", JSON.stringify({ email, username, password }));
 	} catch {
 		showMessage("Không thể lưu tài khoản trên trình duyệt này.");

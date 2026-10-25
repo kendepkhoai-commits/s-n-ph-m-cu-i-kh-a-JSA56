@@ -247,6 +247,7 @@ button:active {
 	}
 
 	.layout {
+		/* Xếp phần giới thiệu và biểu mẫu thành một cột trên màn hình nhỏ. */
 		max-width: 450px;
 		grid-template-columns: 1fr;
 	}

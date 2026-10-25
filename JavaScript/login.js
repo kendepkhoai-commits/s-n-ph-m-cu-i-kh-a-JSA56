@@ -6,6 +6,7 @@ function showMessage(message, type = "error") {
 	formMessage.className = `message ${type}`;
 }
 
+// Dùng query string để báo đăng ký thành công sau khi trang được tải lại/chuyển trang.
 if (new URLSearchParams(window.location.search).has("registered")) {
 	showMessage("Đăng ký thành công. Hãy đăng nhập bằng tài khoản vừa tạo.", "success");
 }
@@ -20,6 +21,7 @@ loginForm.addEventListener("submit", (event) => {
 		return;
 	}
 
+	// localStorage có thể bị trình duyệt chặn, nên cần xử lý lỗi trước khi đọc tài khoản.
 	let savedAccount;
 	try {
 		savedAccount = localStorage.getItem("waterAidAccount");
@@ -33,7 +35,9 @@ loginForm.addEventListener("submit", (event) => {
 		return;
 	}
 
+	// Kiểm tra riêng JSON lỗi và dữ liệu sai cấu trúc để hiện thông báo phù hợp.
 	let account;
+	// Chỉ đánh dấu đăng nhập sau khi thông tin đã khớp và chuyển trang khi lưu phiên thành công.
 	try {
 		account = JSON.parse(savedAccount);
 	} catch {

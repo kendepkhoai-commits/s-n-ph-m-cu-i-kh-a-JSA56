@@ -10,12 +10,14 @@ const reasonTabs = document.querySelectorAll(".reason-tab");
 
 function updateNavbarTogglePosition() {
 	const isHidden = document.body.classList.contains("navbar-hidden");
+	// Giữ nút bật/tắt ngay dưới thanh điều hướng dù thanh này đang hiện hay ẩn.
 	const top = isHidden ? 12 : siteHeader.getBoundingClientRect().bottom - 12;
 	navbarToggle.style.top = `${Math.max(12, top)}px`;
 }
 
 updateNavbarTogglePosition();
 window.addEventListener("resize", updateNavbarTogglePosition);
+// Sự kiện cuộn dùng passive để trình duyệt không phải chờ callback trước khi cuộn trang.
 window.addEventListener("scroll", updateNavbarTogglePosition, { passive: true });
 siteHeader.addEventListener("transitionend", event => {
 	if (event.propertyName === "transform") {
@@ -35,6 +37,7 @@ navbarToggle.addEventListener("click", () => {
 
 reasonTabs.forEach(button => {
 	button.addEventListener("click", () => {
+		// Nội dung của mỗi tab được lưu sẵn trong data-* của nút tương ứng.
 		reasonTabs.forEach(tab => tab.setAttribute("aria-pressed", String(tab === button)));
 		reasonImage.src = button.dataset.image;
 		reasonImage.alt = button.dataset.alt;
@@ -46,6 +49,7 @@ reasonTabs.forEach(button => {
 
 let isAuthenticated = false;
 try {
+	// Phiên đăng nhập chỉ tồn tại trong tab/trình duyệt hiện tại, khác với tài khoản lưu lâu hơn.
 	isAuthenticated = sessionStorage.getItem("waterAidAuthenticated") === "1";
 } catch {
 	// Nếu trình duyệt chặn sessionStorage, coi lượt truy cập là chưa đăng nhập.
@@ -53,6 +57,7 @@ try {
 
 let account;
 try {
+	// Bắt lỗi JSON hỏng để có thể chuyển người dùng về đăng nhập thay vì làm dừng trang.
 	account = JSON.parse(localStorage.getItem("waterAidAccount"));
 } catch {
 	account = null;
@@ -71,4 +76,3 @@ logoutButton.addEventListener("click", () => {
 		window.location.replace("login.html");
 	}
 });
-

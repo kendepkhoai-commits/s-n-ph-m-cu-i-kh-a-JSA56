@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#f5ecdc">
   <title>Thống kê nước sạch | Water for Africa</title>
   <link rel="stylesheet" href="../CSS/information.css">
+  <!-- fetch.js cung cấp hàm gọi API; information.js dùng hàm đó để điền các ô và biểu đồ. -->
   <script src="fetch.js" defer></script>
   <script src="information.js" defer></script>
 </head>
@@ -20,10 +21,12 @@
       <p class="info-eyebrow">DỮ LIỆU · CHÂU PHI · NƯỚC SẠCH</p>
       <h1 id="info-title">Khi thiếu nước, cả cộng đồng chịu ảnh hưởng.</h1>
       <p class="info-lead">Các số liệu dưới đây cho thấy khoảng cách tiếp cận nước uống cơ bản và tử vong liên quan đến dịch vụ nước sạch, vệ sinh môi trường và vệ sinh cá nhân không an toàn.</p>
+      <!-- information.js đổi thông báo tải thành trạng thái thành công hoặc lỗi sau khi gọi API. -->
       <p id="data-status" class="data-status" role="status" aria-live="polite">Đang tải dữ liệu từ Ngân hàng Thế giới...</p>
       <p id="data-error" class="data-error" role="alert" hidden></p>
     </section>
 
+    <!-- Các ID summary-* là đích để information.js chèn kết quả tổng hợp từ API. -->
     <section class="summary-grid" aria-label="Điểm đáng chú ý">
       <article class="summary-item summary-total">
         <p>Ước tính chưa tiếp cận nước cơ bản</p>
@@ -47,6 +50,7 @@
       </article>
     </section>
 
+    <!-- information.js dựng cả ba biểu đồ từ dữ liệu đã tải, thay vì viết sẵn từng cột. -->
     <section class="chart-section" aria-labelledby="access-title">
       <div class="chart-heading">
         <span class="chart-index">01</span>
