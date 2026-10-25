@@ -2,8 +2,8 @@ const loginForm = document.querySelector("#login-form");
 const formMessage = document.querySelector("#form-message");
 
 function showMessage(message, type = "error") {
-	formMessage.textContent = message;
-	formMessage.className = `message ${type}`;
+	formMessage.textContent = message; // Hiện thông báo ngay dưới biểu mẫu.
+	formMessage.className = `message ${type}`; // Dùng kiểu success hoặc error trong CSS.
 }
 
 // Dùng query string để báo đăng ký thành công sau khi trang được tải lại/chuyển trang.
@@ -12,10 +12,11 @@ if (new URLSearchParams(window.location.search).has("registered")) {
 }
 
 loginForm.addEventListener("submit", (event) => {
-	event.preventDefault();
+	event.preventDefault(); // Tự kiểm tra thông tin, không tải lại trang.
 
-	const email = loginForm.email.value.trim();
-	const password = loginForm.password.value;
+	const email = loginForm.email.value.trim(); // Bỏ khoảng trắng quanh email.
+	const password = loginForm.password.value; // Mật khẩu phải khớp chính xác.
+	// Báo lỗi nếu thiếu email hoặc mật khẩu.
 	if (!email || !password) {
 		showMessage("Vui lòng nhập địa chỉ email và mật khẩu.");
 		return;
@@ -24,7 +25,7 @@ loginForm.addEventListener("submit", (event) => {
 	// localStorage có thể bị trình duyệt chặn, nên cần xử lý lỗi trước khi đọc tài khoản.
 	let savedAccount;
 	try {
-		savedAccount = localStorage.getItem("waterAidAccount");
+		savedAccount = localStorage.getItem("waterAidAccount"); // Đọc tài khoản đã đăng ký.
 	} catch {
 		showMessage("Không thể đọc dữ liệu tài khoản trên trình duyệt này.");
 		return;
@@ -35,9 +36,8 @@ loginForm.addEventListener("submit", (event) => {
 		return;
 	}
 
-	// Kiểm tra riêng JSON lỗi và dữ liệu sai cấu trúc để hiện thông báo phù hợp.
+	// Chuyển chuỗi JSON thành object để so sánh thông tin đăng nhập.
 	let account;
-	// Chỉ đánh dấu đăng nhập sau khi thông tin đã khớp và chuyển trang khi lưu phiên thành công.
 	try {
 		account = JSON.parse(savedAccount);
 	} catch {
@@ -50,18 +50,19 @@ loginForm.addEventListener("submit", (event) => {
 		return;
 	}
 
-	// Địa chỉ email không phân biệt chữ hoa/thường; mật khẩu phải khớp chính xác.
+	// Email không phân biệt hoa/thường; mật khẩu phải giống hoàn toàn.
 	if (email.toLowerCase() !== account.email.toLowerCase() || password !== account.password) {
 		showMessage("Địa chỉ email hoặc mật khẩu không chính xác.");
 		return;
 	}
 
 	try {
+		// Lưu cờ phiên để menu biết người dùng đã đăng nhập.
 		sessionStorage.setItem("waterAidAuthenticated", "1");
 	} catch {
 		showMessage("Không thể tạo phiên đăng nhập trên trình duyệt này.");
 		return;
 	}
 
-	window.location.href = "menu.html";
+	window.location.href = "menu.html"; // Đăng nhập thành công thì mở trang menu.
 });

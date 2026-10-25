@@ -51,6 +51,7 @@ a {
 }
 
 .navbar-toggle {
+	/* Nút vẫn đứng giữa màn hình khi thanh điều hướng được ẩn hoặc hiện. */
 	position: fixed;
 	top: 76px;
 	left: 50%;
@@ -197,6 +198,7 @@ body.navbar-hidden .site-header {
 }
 
 .hero::before {
+	/* Lớp phủ giúp chữ nổi bật trên ảnh nền mà không cần chỉnh sửa ảnh gốc. */
 	position: absolute;
 	inset: 0;
 	content: "";
@@ -250,6 +252,7 @@ body.navbar-hidden .site-header {
 }
 
 .why-water-intro {
+	/* Chia lời giới thiệu thành hai cột; breakpoint sẽ xếp lại trên điện thoại. */
 	width: min(calc(100% - 48px), 1120px);
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -336,6 +339,7 @@ body.navbar-hidden .site-header {
 }
 
 .reason-panel {
+	/* Đặt thẻ nội dung nổi phía trên ảnh, neo ở góc dưới bên phải. */
 	position: absolute;
 	right: clamp(18px, 4vw, 58px);
 	bottom: clamp(18px, 4vw, 48px);
@@ -395,6 +399,7 @@ body.navbar-hidden .site-header {
 }
 
 .impact-layout {
+	/* Cột số liệu tóm tắt hẹp hơn danh sách quốc gia; minmax tránh tràn nội dung. */
 	display: grid;
 	grid-template-columns: minmax(260px, .85fr) minmax(0, 1.15fr);
 	gap: 54px;
@@ -570,11 +575,13 @@ body.navbar-hidden .site-header {
 }
 
 .fact-year {
+	/* Năm lớn là chi tiết trang trí, không được phép chiếm cột rộng cố định. */
 	color: rgb(255 255 255 / 16%);
 	font: 500 clamp(54px, 9vw, 130px)/1 "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
 
 .about-section {
+	/* Lề ngang co giãn theo viewport nhưng giữ nội dung trong bề rộng chung 1120px. */
 	display: grid;
 	grid-template-columns: .65fr 1.45fr .8fr;
 	align-items: start;
@@ -632,6 +639,7 @@ body.navbar-hidden .site-header {
 
 .video-frame {
 	width: 100%;
+	/* Giữ khung video đúng tỷ lệ 16:9 khi chiều rộng thay đổi. */
 	aspect-ratio: 16 / 9;
 	background: #2b211b;
 }

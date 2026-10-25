@@ -1,23 +1,23 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5ecdc">
+  <meta charset="utf-8"> <!-- Dùng bộ ký tự hỗ trợ tiếng Việt. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Giúp trang co giãn đúng trên điện thoại. -->
+  <meta name="theme-color" content="#f5ecdc"> <!-- Màu thanh trình duyệt trên thiết bị hỗ trợ. -->
   <title>Ủng hộ | Water for Africa</title>
-  <link rel="stylesheet" href="../CSS/donate.css">
-  <script src="donate.js" defer></script>
+  <link rel="stylesheet" href="../CSS/donate.css"> <!-- Nạp kiểu dáng riêng của trang quyên góp. -->
+  <script src="donate.js" defer></script> <!-- Nạp JavaScript sau khi HTML được phân tích. -->
 </head>
 <body class="donate-page">
   <header class="donate-header">
-    <a class="back-link" href="menu.html"><span aria-hidden="true">←</span> Trang chủ</a>
+    <a class="back-link" href="menu.html"><span aria-hidden="true">←</span> Trang chủ</a> <!-- Quay về trang chính. -->
     <a class="brand" href="menu.html" aria-label="Water for Africa, về trang chủ">
       <span class="brand-mark" aria-hidden="true">W</span>
       <span>waterforafrica</span>
     </a>
-    <div class="currency-toggle-box" role="group" aria-label="Chọn đơn vị tiền tệ">
-      <button id="curr-vnd" class="currency-btn active" type="button" aria-pressed="true">₫ VNĐ</button>
-      <button id="curr-usd" class="currency-btn" type="button" aria-pressed="false">$ USD</button>
+    <div class="currency-toggle-box" role="group" aria-label="Chọn đơn vị tiền tệ"> <!-- Hai nút này đổi đơn vị trên toàn trang. -->
+      <button id="curr-vnd" class="currency-btn active" type="button" aria-pressed="true">₫ VNĐ</button> <!-- Mặc định hiển thị tiền Việt. -->
+      <button id="curr-usd" class="currency-btn" type="button" aria-pressed="false">$ USD</button> <!-- Đổi số liệu hiển thị sang đô la Mỹ. -->
     </div>
   </header>
 
@@ -27,48 +27,49 @@
       <h1 id="campaign-heading">Mỗi đóng góp đều tạo nên thay đổi.</h1>
       <p>Góp sức nâng cao nhận thức và hỗ trợ các cộng đồng cần nguồn nước an toàn.</p>
 
-      <div class="campaign-progress" aria-label="Tiến độ đóng góp">
+      <div class="campaign-progress" aria-label="Tiến độ đóng góp"> <!-- Các ID bên trong được donate.js cập nhật. -->
         <div class="progress-header">
           <div>
             <span class="progress-label">Đã đóng góp</span>
-            <strong id="stat-raised">842.650.000 ₫</strong>
+            <strong id="stat-raised">842.650.000 ₫</strong> <!-- Tổng tiền đã quyên góp. -->
           </div>
-          <span id="stat-percent">70.2%</span>
+          <span id="stat-percent">70.2%</span> <!-- Phần trăm hoàn thành mục tiêu. -->
         </div>
         <div class="progress-track" role="progressbar" aria-valuenow="70.2" aria-valuemin="0" aria-valuemax="100">
           <span class="progress-fill" id="progress-fill"></span>
         </div>
-        <p class="progress-meta">Mục tiêu <strong id="stat-target">1.200.000.000 ₫</strong></p>
+        <p class="progress-meta">Mục tiêu <strong id="stat-target">1.200.000.000 ₫</strong></p> <!-- Tổng tiền mục tiêu. -->
       </div>
     </section>
 
     <div class="donate-layout">
       <section class="donation-panel" aria-labelledby="form-step-title">
-        <form id="donation-hub-form" novalidate>
+        <form id="donation-hub-form" novalidate> <!-- donate.js tự kiểm tra dữ liệu và hiện lỗi dưới từng trường. -->
           <section class="form-section" aria-labelledby="form-step-title">
             <h2 id="form-step-title">Mức đóng góp</h2>
             <fieldset class="frequency-group">
               <legend>Tần suất ủng hộ</legend>
               <label class="choice-label">
-                <input type="radio" name="frequency" value="once" checked>
+                <input type="radio" name="frequency" value="once" checked> <!-- Chọn ủng hộ một lần. -->
                 <span>Một lần</span>
               </label>
               <label class="choice-label">
-                <input type="radio" name="frequency" value="monthly">
+                <input type="radio" name="frequency" value="monthly"> <!-- Chọn ủng hộ định kỳ hàng tháng. -->
                 <span>Hàng tháng</span>
               </label>
             </fieldset>
 
             <!-- donate.js tạo các lựa chọn mức tiền theo đơn vị VNĐ/USD đang chọn. -->
-            <div class="amount-grid" id="amount-grid" role="radiogroup" aria-label="Chọn mức tiền"></div>
+            <div class="amount-grid" id="amount-grid" role="radiogroup" aria-label="Chọn mức tiền"></div> <!-- JS tạo các nút mức tiền vào đây. -->
             <label class="custom-amount-wrapper" id="custom-amount-wrapper">
               <span>Số tiền tùy chọn</span>
               <span class="custom-amount-field">
-                <input type="number" id="custom-amount-input" min="10000" step="5000" placeholder="Nhập số tiền">
-                <span id="custom-curr-symbol">₫</span>
+                <input type="number" id="custom-amount-input" min="10000" step="10000" placeholder="Nhập số tiền" aria-describedby="error-custom-amount"> <!-- Người dùng nhập khoản tiền riêng. -->
+                <span id="custom-curr-symbol">₫</span> <!-- Ký hiệu đổi theo VNĐ/USD. -->
               </span>
+              <p class="form-error-msg" id="error-custom-amount">Vui lòng nhập số tiền hợp lệ theo đơn vị đang chọn.</p>
             </label>
-            <p class="impact-note" id="impact-desc-text">Khoản đóng góp của bạn giúp hỗ trợ các cộng đồng cần nước sạch.</p>
+            <p class="impact-note" id="impact-desc-text">Khoản đóng góp của bạn giúp hỗ trợ các cộng đồng cần nước sạch.</p> <!-- JS thay bằng mô tả tác động theo số tiền. -->
           </section>
 
           <!-- Các ID của input phải khớp selector donate.js; tên/email được kiểm tra, còn các trường khác dùng cho biên lai/danh sách. -->
@@ -78,36 +79,28 @@
               <!-- #donor-fullname và #donor-email là hai trường bắt buộc; lỗi được hiện ở error-fullname/error-email. -->
               <div class="form-group">
                 <label for="donor-fullname">Họ và tên <span class="required-dot">*</span></label>
-                <input type="text" id="donor-fullname" class="form-input" placeholder="Nguyễn Văn An" required autocomplete="name">
-                <p class="form-error-msg" id="error-fullname">Vui lòng nhập họ và tên.</p>
+                <input type="text" id="donor-fullname" class="form-input" placeholder="Nguyễn Văn An" required autocomplete="name"> <!-- Tên bắt buộc; JS lấy tên để lưu hoặc in biên lai. -->
+                <p class="form-error-msg" id="error-fullname">Vui lòng nhập họ và tên.</p> <!-- JS hiện dòng này nếu tên bị bỏ trống. -->
               </div>
               <div class="form-group">
-                <label for="donor-email">Email nhận biên lai <span class="required-dot">*</span></label>
-                <input type="email" id="donor-email" class="form-input" placeholder="ban@example.com" required autocomplete="email">
-                <p class="form-error-msg" id="error-email">Vui lòng nhập địa chỉ email hợp lệ.</p>
+                <label for="donor-email">Email liên hệ <span class="required-dot">*</span></label>
+                <input type="email" id="donor-email" class="form-input" placeholder="ban@example.com" required autocomplete="email"> <!-- Email bắt buộc để ghi trên biên lai. -->
+                <p class="form-error-msg" id="error-email">Vui lòng nhập địa chỉ email hợp lệ.</p> <!-- JS hiện dòng này nếu email sai định dạng. -->
               </div>
-              <!-- Các ID này lần lượt được donate.js dùng để điền dữ liệu mẫu, lưu địa điểm/lời nhắn vào danh sách ủng hộ. -->
-              <div class="form-group">
-                <label for="donor-phone">Số điện thoại <span class="optional-tag">(không bắt buộc)</span></label>
-                <input type="tel" id="donor-phone" class="form-input" autocomplete="tel">
-              </div>
+              <!-- Địa điểm/lời nhắn được lưu cùng lượt ủng hộ trong danh sách mẫu. -->
               <div class="form-group">
                 <label for="donor-city">Tỉnh / thành phố <span class="optional-tag">(không bắt buộc)</span></label>
-                <input type="text" id="donor-city" class="form-input">
+                <input type="text" id="donor-city" class="form-input"> <!-- Tỉnh/thành được lưu cùng lượt ủng hộ. -->
               </div>
               <div class="form-group form-group-full">
                 <label for="donor-message">Lời nhắn <span class="optional-tag">(không bắt buộc)</span></label>
-                <textarea id="donor-message" class="form-input" rows="3" placeholder="Gửi lời nhắn của bạn"></textarea>
+                <textarea id="donor-message" class="form-input" rows="3" placeholder="Gửi lời nhắn của bạn"></textarea> <!-- Lời nhắn tùy chọn hiện trong danh sách. -->
               </div>
-              <!-- #donor-anonymous thay tên hiển thị trong danh sách; #donor-subscribe hiện chỉ giữ lựa chọn, chưa gửi email đăng ký. -->
+              <!-- Lựa chọn ẩn danh thay tên hiển thị trong danh sách. -->
               <div class="form-group form-group-full checkbox-list">
                 <label class="checkbox-group">
-                  <input type="checkbox" id="donor-anonymous">
+                  <input type="checkbox" id="donor-anonymous"> <!-- Khi chọn, danh sách chỉ hiện tên ẩn danh. -->
                   <span>Hiển thị tên ẩn danh trong danh sách ủng hộ</span>
-                </label>
-                <label class="checkbox-group">
-                  <input type="checkbox" id="donor-subscribe" checked>
-                  <span>Nhận thông tin cập nhật qua email</span>
                 </label>
               </div>
             </div>
@@ -117,8 +110,8 @@
           <section class="form-section" aria-labelledby="payment-title">
             <h2 id="payment-title">Phương thức thanh toán</h2>
             <div class="payment-tabs" role="tablist" aria-label="Chọn phương thức thanh toán">
-              <button type="button" class="payment-tab-btn active" id="tab-btn-card" role="tab" aria-selected="true" aria-controls="tab-content-card">Thẻ ngân hàng</button>
-              <button type="button" class="payment-tab-btn" id="tab-btn-bank" role="tab" aria-selected="false" aria-controls="tab-content-bank">Chuyển khoản</button>
+              <button type="button" class="payment-tab-btn active" id="tab-btn-card" role="tab" aria-selected="true" aria-controls="tab-content-card">Thẻ ngân hàng</button> <!-- Hiện trường thẻ và bật kiểm tra thẻ. -->
+              <button type="button" class="payment-tab-btn" id="tab-btn-bank" role="tab" aria-selected="false" aria-controls="tab-content-bank">Chuyển khoản</button> <!-- Hiện QR và bỏ qua kiểm tra trường thẻ. -->
             </div>
 
             <div id="tab-content-card" class="tab-pane" role="tabpanel" aria-labelledby="tab-btn-card">
@@ -133,7 +126,7 @@
               <div class="form-grid">
                 <div class="form-group form-group-full">
                   <label for="card-bank-select">Ngân hàng phát hành</label>
-                  <select id="card-bank-select" class="form-input">
+                  <select id="card-bank-select" class="form-input"> <!-- Chọn ngân hàng phát hành thẻ. -->
                     <option value="Vietcombank">Vietcombank</option>
                     <option value="MB Bank">MB Bank</option>
                     <option value="Techcombank">Techcombank</option>
@@ -147,23 +140,23 @@
                 </div>
                 <div class="form-group form-group-full">
                   <label for="card-number-input">Số thẻ <span class="required-dot">*</span> <span id="detected-card-brand"></span></label>
-                  <input type="text" id="card-number-input" class="form-input" placeholder="16 chữ số" maxlength="19" inputmode="numeric" required>
-                  <p class="form-error-msg" id="error-card-number">Vui lòng nhập số thẻ hợp lệ (16 chữ số).</p>
+                  <input type="text" id="card-number-input" class="form-input" placeholder="16 chữ số" maxlength="19" inputmode="numeric" required> <!-- JS định dạng theo nhóm bốn số và kiểm tra đủ 16 số. -->
+                  <p class="form-error-msg" id="error-card-number">Vui lòng nhập số thẻ hợp lệ (16 chữ số).</p> <!-- Vùng báo lỗi số thẻ. -->
                 </div>
                 <div class="form-group form-group-full">
                   <label for="card-holder-input">Tên in trên thẻ <span class="required-dot">*</span></label>
-                  <input type="text" id="card-holder-input" class="form-input" placeholder="NGUYEN VAN A" maxlength="30" required>
-                  <p class="form-error-msg" id="error-card-holder">Vui lòng nhập tên in trên thẻ.</p>
+                  <input type="text" id="card-holder-input" class="form-input" placeholder="NGUYEN VAN A" maxlength="30" required> <!-- Tên được bỏ dấu/viết hoa và đồng bộ lên thẻ xem trước. -->
+                  <p class="form-error-msg" id="error-card-holder">Vui lòng nhập tên in trên thẻ.</p> <!-- Vùng báo lỗi tên chủ thẻ. -->
                 </div>
                 <div class="form-group">
                   <label for="card-expiry-input">Ngày hết hạn <span class="required-dot">*</span></label>
-                  <input type="text" id="card-expiry-input" class="form-input" placeholder="MM/YY" maxlength="5" inputmode="numeric" required>
-                  <p class="form-error-msg" id="error-card-expiry">Ngày hết hạn không hợp lệ.</p>
+                  <input type="text" id="card-expiry-input" class="form-input" placeholder="MM/YY" maxlength="5" inputmode="numeric" required> <!-- JS tự thêm dấu / giữa tháng và năm. -->
+                  <p class="form-error-msg" id="error-card-expiry">Ngày hết hạn không hợp lệ.</p> <!-- Vùng báo lỗi ngày hết hạn. -->
                 </div>
                 <div class="form-group">
                   <label for="card-cvv-input">CVV / CVC <span class="required-dot">*</span></label>
-                  <input type="password" id="card-cvv-input" class="form-input" placeholder="•••" maxlength="4" inputmode="numeric" required>
-                  <p class="form-error-msg" id="error-card-cvv">Vui lòng nhập mã CVV/CVC gồm 3 hoặc 4 số.</p>
+                  <input type="password" id="card-cvv-input" class="form-input" placeholder="•••" maxlength="4" inputmode="numeric" required> <!-- CVV chỉ được kiểm tra độ dài trong bản demo. -->
+                  <p class="form-error-msg" id="error-card-cvv">Vui lòng nhập mã CVV/CVC gồm 3 hoặc 4 số.</p> <!-- Vùng báo lỗi CVV. -->
                 </div>
               </div>
             </div>
@@ -171,87 +164,76 @@
             <!-- Hai vùng thanh toán được donate.js bật/tắt theo tab đang chọn. -->
             <!-- Khi chọn chuyển khoản, QR và nội dung chuyển khoản được cập nhật theo khoản tiền; nút Sao chép lấy nội dung từ các ID bank-*. -->
             <div id="tab-content-bank" class="tab-pane" role="tabpanel" aria-labelledby="tab-btn-bank" style="display: none;">
-              <div class="bank-transfer-panel">
-                <img id="vietqr-image" class="qr-image" src="" alt="Mã QR chuyển khoản">
+              <div class="bank-transfer-panel"> <!-- Khu vực hướng dẫn chuyển khoản ngân hàng. -->
+                <img id="vietqr-image" class="qr-image" src="" alt="Mã QR chuyển khoản"> <!-- JS gán URL VietQR theo số tiền/nội dung. -->
                 <p>Quét mã bằng ứng dụng ngân hàng hoặc chuyển khoản theo thông tin dưới đây.</p>
                 <dl class="bank-details">
                   <div><dt>Ngân hàng</dt><dd>MB Bank</dd></div>
                   <div>
                     <dt>Số tài khoản</dt>
-                    <dd><span id="bank-acc-num">999988886868</span><button type="button" class="copy-btn" id="btn-copy-acc">Sao chép</button></dd>
+                    <dd><span id="bank-acc-num">999988886868</span><button type="button" class="copy-btn" id="btn-copy-acc">Sao chép</button></dd> <!-- Nút sao chép đọc số tài khoản từ ID bank-acc-num. -->
                   </div>
                   <div><dt>Chủ tài khoản</dt><dd>QUY CUU TRO HAN HAN WATER FOR AFRICA</dd></div>
-                  <div><dt>Số tiền</dt><dd id="bank-transfer-amount">500.000 ₫</dd></div>
+                  <div><dt>Số tiền</dt><dd id="bank-transfer-amount">500.000 ₫</dd></div> <!-- JS đồng bộ số tiền và quy đổi USD sang VNĐ. -->
                   <div>
                     <dt>Nội dung chuyển khoản</dt>
-                    <dd><span id="bank-transfer-memo">WFA HANHAN 8921</span><button type="button" class="copy-btn" id="btn-copy-memo">Sao chép</button></dd>
+                    <dd><span id="bank-transfer-memo">WFA HANHAN 8921</span><button type="button" class="copy-btn" id="btn-copy-memo">Sao chép</button></dd> <!-- Mã được tạo ngẫu nhiên và có thể sao chép. -->
                   </div>
                 </dl>
-                <div class="form-grid">
-                  <div class="form-group">
-                    <label for="sender-bank-name">Ngân hàng chuyển</label>
-                    <input type="text" id="sender-bank-name" class="form-input">
-                  </div>
-                  <div class="form-group">
-                    <label for="sender-acc-name">Tên người chuyển / mã giao dịch</label>
-                    <input type="text" id="sender-acc-name" class="form-input">
-                  </div>
-                </div>
               </div>
             </div>
           </section>
 
           <details class="test-fill">
             <summary>Điền dữ liệu mẫu để kiểm thử</summary>
-            <button type="button" id="btn-fill-test-data">Điền dữ liệu mẫu</button>
+            <button type="button" id="btn-fill-test-data">Điền dữ liệu mẫu</button> <!-- Gọi donate.js để điền nhanh dữ liệu thử. -->
           </details>
 
           <div class="order-summary">
             <h2>Tóm tắt đóng góp</h2>
-            <p><span>Mức đóng góp</span><strong id="summary-chosen-amount">500.000 ₫</strong></p>
-            <p><span>Hình thức</span><span id="summary-chosen-freq">Ủng hộ một lần</span></p>
-            <p class="summary-total"><span>Tổng cộng</span><strong id="summary-total-display">500.000 ₫</strong></p>
+            <p><span>Mức đóng góp</span><strong id="summary-chosen-amount">500.000 ₫</strong></p> <!-- Mức tiền đang chọn. -->
+            <p><span>Hình thức</span><span id="summary-chosen-freq">Ủng hộ một lần</span></p> <!-- Tần suất đang chọn. -->
+            <p class="summary-total"><span>Tổng cộng</span><strong id="summary-total-display">500.000 ₫</strong></p> <!-- Tổng được đồng bộ từ mức đóng góp. -->
           </div>
 
-          <button type="submit" class="donation-submit-btn" id="submit-donation-btn">
+          <button type="submit" class="donation-submit-btn" id="submit-donation-btn"> <!-- Gửi biểu mẫu để kiểm tra rồi mô phỏng ghi nhận. -->
             <span id="submit-btn-text">Xác nhận ủng hộ 500.000 ₫</span>
             <span aria-hidden="true">→</span>
           </button>
-          <p class="form-note">Biên lai sẽ được hiển thị sau khi xác nhận.</p>
+          <p class="form-note">Đây là bản mô phỏng: không xử lý thanh toán thật; dữ liệu chỉ được lưu trong trình duyệt.</p>
         </form>
       </section>
 
       <aside class="donate-sidebar" aria-labelledby="donors-title">
         <h2 id="donors-title">Lượt ủng hộ gần đây</h2>
         <!-- Danh sách này được dựng từ dữ liệu đã lưu trong trình duyệt. -->
-        <div class="donors-list" id="donors-list" aria-live="polite"></div>
+        <div class="donors-list" id="donors-list" aria-live="polite"></div> <!-- JS dựng danh sách lượt ủng hộ đã lưu ở đây. -->
       </aside>
     </div>
   </main>
 
   <!-- Biên lai chỉ xuất hiện sau khi biểu mẫu được xác nhận thành công. -->
-  <div class="modal-overlay" id="receipt-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="receipt-title">
+  <div class="modal-overlay" id="receipt-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="receipt-title"> <!-- JS mở hộp thoại sau khi ghi nhận bản demo. -->
     <section class="receipt-modal">
-      <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Đóng biên lai">×</button>
+      <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Đóng biên lai">×</button> <!-- Đóng biên lai. -->
       <p class="eyebrow">WATER FOR AFRICA</p>
-      <h2 id="receipt-title">Cảm ơn bạn đã đóng góp</h2>
-      <p>Mã biên lai: <strong id="receipt-code">WFA-2026-89472</strong></p>
+      <h2 id="receipt-title">Đã ghi nhận lượt ủng hộ mô phỏng</h2>
+      <p>Mã tham chiếu: <strong id="receipt-code">WFA-2026-89472</strong></p> <!-- JS thay bằng mã mô phỏng vừa tạo. -->
       <dl class="receipt-details">
-        <div><dt>Người ủng hộ</dt><dd id="receipt-donor-name">Nguyễn Văn An</dd></div>
-        <div><dt>Email</dt><dd id="receipt-donor-email">ban@example.com</dd></div>
-        <div><dt>Số tiền</dt><dd id="receipt-amount">500.000 ₫</dd></div>
-        <div><dt>Hình thức</dt><dd id="receipt-frequency">Ủng hộ một lần</dd></div>
-        <div><dt>Thanh toán</dt><dd id="receipt-payment-method">Thẻ ngân hàng</dd></div>
-        <div><dt>Thời gian</dt><dd id="receipt-timestamp">--</dd></div>
+        <div><dt>Người ủng hộ</dt><dd id="receipt-donor-name">Nguyễn Văn An</dd></div> <!-- Tên thật hoặc nhãn ẩn danh. -->
+        <div><dt>Email</dt><dd id="receipt-donor-email">ban@example.com</dd></div> <!-- Email người ủng hộ. -->
+        <div><dt>Số tiền</dt><dd id="receipt-amount">500.000 ₫</dd></div> <!-- Khoản đóng góp. -->
+        <div><dt>Hình thức</dt><dd id="receipt-frequency">Ủng hộ một lần</dd></div> <!-- Một lần hoặc hàng tháng. -->
+        <div><dt>Thanh toán</dt><dd id="receipt-payment-method">Thẻ ngân hàng</dd></div> <!-- Thẻ hoặc chuyển khoản. -->
+        <div><dt>Thời gian</dt><dd id="receipt-timestamp">--</dd></div> <!-- Thời điểm tạo biên lai. -->
       </dl>
       <div class="receipt-actions">
-        <button type="button" class="secondary-button" id="btn-print-receipt">In biên lai</button>
-        <button type="button" class="primary-button" id="btn-close-receipt">Đóng</button>
+        <button type="button" class="primary-button" id="btn-close-receipt">Đóng</button> <!-- Đóng biên lai. -->
       </div>
     </section>
   </div>
   <div class="toast-notice" id="toast-notice" role="status" aria-live="polite">
-    <span id="toast-msg"></span>
+    <span id="toast-msg"></span> <!-- JS đặt nội dung thông báo vào đây. -->
   </div>
 
   <footer class="donate-footer">

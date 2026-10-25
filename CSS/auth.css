@@ -26,6 +26,7 @@ body {
 
 /* Lớp phủ làm tối ảnh nền; các biểu mẫu vẫn nằm phía trên lớp phủ. */
 body::before {
+	/* Lớp phủ nằm phía sau nội dung; position: relative của .layout giữ form ở trên. */
 	position: fixed;
 	inset: 0;
 	content: "";
@@ -33,6 +34,7 @@ body::before {
 }
 
 .layout {
+	/* Cột giới thiệu co giãn còn cột biểu mẫu giữ độ rộng dễ đọc trên desktop. */
 	position: relative;
 	width: min(100%, 980px);
 	display: grid;
@@ -41,7 +43,6 @@ body::before {
 	border: 1px solid rgb(255 250 242 / 45%);
 	border-radius: 8px;
 	box-shadow: 0 26px 80px rgb(32 17 10 / 36%);
-	animation: arrive 450ms ease-out both;
 }
 
 .story {
@@ -139,7 +140,6 @@ h1 {
 	border-radius: 8px;
 	background: var(--paper);
 	box-shadow: 0 26px 80px rgb(32 17 10 / 36%);
-	animation: arrive 420ms ease-out both;
 }
 
 .login-panel h1 {
@@ -235,11 +235,6 @@ button:active {
 	font-weight: 700;
 }
 
-@keyframes arrive {
-	from { opacity: 0; transform: translateY(12px); }
-	to { opacity: 1; transform: translateY(0); }
-}
-
 @media (max-width: 760px) {
 	body {
 		padding: 16px;
@@ -277,16 +272,13 @@ button:active {
 }
 
 @media (max-width: 480px) {
-	body {
-		padding: 16px;
-	}
-
 	.login-panel {
 		padding: 30px 24px;
 	}
 }
 
 @media (prefers-reduced-motion: reduce) {
+	/* Giảm thời lượng về gần 0 để giữ trạng thái cuối mà không phát hiệu ứng dài. */
 	*,
 	*::before,
 	*::after {

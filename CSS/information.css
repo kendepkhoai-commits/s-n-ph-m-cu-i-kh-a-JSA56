@@ -232,6 +232,7 @@ a {
 }
 
 .bar-fill {
+	/* JavaScript đặt --bar-width theo giá trị dữ liệu để các cột cùng thang đo. */
 	width: var(--bar-width);
 	height: 100%;
 	display: block;
@@ -326,6 +327,7 @@ a {
 	}
 
 	.summary-item:nth-child(2) {
+		/* Hàng đầu của lưới hai cột không cần đường phân cách ở cạnh phải. */
 		border-right: 0;
 	}
 
@@ -335,6 +337,7 @@ a {
 	}
 
 	.summary-item:nth-child(3) {
+		/* Bắt đầu hàng thứ hai, nên căn nội dung theo mép trái của lưới. */
 		padding-left: 0;
 	}
 

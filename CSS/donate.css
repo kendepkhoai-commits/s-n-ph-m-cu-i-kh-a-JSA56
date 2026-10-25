@@ -263,6 +263,7 @@ button {
 
 .choice-label input,
 .amount-btn-label input {
+	/* Giữ radio có thể focus/chọn bằng bàn phím nhưng ẩn phần hiển thị gốc. */
 	position: absolute;
 	width: 1px;
 	height: 1px;
@@ -295,6 +296,7 @@ button {
 }
 
 .amount-grid {
+	/* Chia đều các mức đóng góp; minmax cho phép cột thu nhỏ trên màn hình hẹp. */
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
 	gap: 8px;
@@ -717,6 +719,7 @@ textarea.form-input {
 }
 
 .donor-message {
+	/* Giới hạn lời nhắn ở hai dòng để một mục donate không làm dài sidebar. */
 	display: -webkit-box;
 	overflow: hidden;
 	-webkit-box-orient: vertical;
@@ -761,6 +764,7 @@ textarea.form-input {
 }
 
 .modal-overlay {
+	/* Phủ viewport, cuộn được khi hộp thoại cao hơn màn hình. */
 	position: fixed;
 	inset: 0;
 	z-index: 10;
@@ -946,37 +950,6 @@ textarea.form-input {
 
 	.receipt-modal {
 		padding: 24px 18px;
-	}
-}
-
-@media print {
-	/* Khi in, chỉ hiện biên lai; ẩn toàn bộ giao diện còn lại khỏi bản in. */
-	body * {
-		visibility: hidden;
-	}
-
-	.receipt-modal,
-	.receipt-modal * {
-		visibility: visible;
-	}
-
-	.modal-overlay {
-		position: absolute;
-		inset: 0;
-		display: block;
-		padding: 0;
-		background: white;
-	}
-
-	.receipt-modal {
-		width: 100%;
-		max-height: none;
-		box-shadow: none;
-	}
-
-	.modal-close-btn,
-	.receipt-actions {
-		display: none;
 	}
 }
 
