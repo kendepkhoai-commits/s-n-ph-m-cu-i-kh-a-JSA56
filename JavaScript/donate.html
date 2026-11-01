@@ -44,7 +44,7 @@
 
     <div class="donate-layout">
       <section class="donation-panel" aria-labelledby="form-step-title">
-        <form id="donation-hub-form" novalidate> <!-- donate.js tự kiểm tra dữ liệu và hiện lỗi dưới từng trường. -->
+        <form id="donation-hub-form" novalidate> <!-- donate.js kiểm tra mức tiền; thông tin cá nhân và thanh toán không bắt buộc. -->
           <section class="form-section" aria-labelledby="form-step-title">
             <h2 id="form-step-title">Mức đóng góp</h2>
             <fieldset class="frequency-group">
@@ -54,8 +54,8 @@
                 <span>Một lần</span>
               </label>
               <label class="choice-label">
-                <input type="radio" name="frequency" value="monthly"> <!-- Chọn ủng hộ định kỳ hàng tháng. -->
-                <span>Hàng tháng</span>
+                <input type="radio" name="frequency" value="monthly"> <!-- Chỉ đổi cách ghi nhận trong bản demo; không tạo thanh toán định kỳ. -->
+                <span>Hàng tháng (mô phỏng)</span>
               </label>
             </fieldset>
 
@@ -72,22 +72,15 @@
             <p class="impact-note" id="impact-desc-text">Khoản đóng góp của bạn giúp hỗ trợ các cộng đồng cần nước sạch.</p> <!-- JS thay bằng mô tả tác động theo số tiền. -->
           </section>
 
-          <!-- Các ID của input phải khớp selector donate.js; tên/email được kiểm tra, còn các trường khác dùng cho biên lai/danh sách. -->
+          <!-- Thông tin cá nhân đều tùy chọn; dự án demo không cần email hay dữ liệu thanh toán thật. -->
           <section class="form-section" aria-labelledby="donor-title">
-            <h2 id="donor-title">Thông tin người ủng hộ</h2>
+            <h2 id="donor-title">Thông tin hiển thị (không bắt buộc)</h2>
             <div class="form-grid">
-              <!-- #donor-fullname và #donor-email là hai trường bắt buộc; lỗi được hiện ở error-fullname/error-email. -->
               <div class="form-group">
-                <label for="donor-fullname">Họ và tên <span class="required-dot">*</span></label>
-                <input type="text" id="donor-fullname" class="form-input" placeholder="Nguyễn Văn An" required autocomplete="name"> <!-- Tên bắt buộc; JS lấy tên để lưu hoặc in biên lai. -->
-                <p class="form-error-msg" id="error-fullname">Vui lòng nhập họ và tên.</p> <!-- JS hiện dòng này nếu tên bị bỏ trống. -->
+                <label for="donor-fullname">Tên hiển thị <span class="optional-tag">(không bắt buộc)</span></label>
+                <input type="text" id="donor-fullname" class="form-input" placeholder="Ví dụ: Minh An" autocomplete="name"> <!-- Có thể nhập tên mẫu; bỏ trống vẫn gửi được bản mô phỏng. -->
               </div>
-              <div class="form-group">
-                <label for="donor-email">Email liên hệ <span class="required-dot">*</span></label>
-                <input type="email" id="donor-email" class="form-input" placeholder="ban@example.com" required autocomplete="email"> <!-- Email bắt buộc để ghi trên biên lai. -->
-                <p class="form-error-msg" id="error-email">Vui lòng nhập địa chỉ email hợp lệ.</p> <!-- JS hiện dòng này nếu email sai định dạng. -->
-              </div>
-              <!-- Địa điểm/lời nhắn được lưu cùng lượt ủng hộ trong danh sách mẫu. -->
+              <!-- Địa điểm/lời nhắn tùy chọn chỉ được lưu trong danh sách mô phỏng trên trình duyệt. -->
               <div class="form-group">
                 <label for="donor-city">Tỉnh / thành phố <span class="optional-tag">(không bắt buộc)</span></label>
                 <input type="text" id="donor-city" class="form-input"> <!-- Tỉnh/thành được lưu cùng lượt ủng hộ. -->
@@ -106,82 +99,9 @@
             </div>
           </section>
 
-          <!-- tab-btn-card/tab-btn-bank bật tắt hai vùng thanh toán; lựa chọn này quyết định validateForm kiểm tra nhóm trường nào. -->
           <section class="form-section" aria-labelledby="payment-title">
-            <h2 id="payment-title">Phương thức thanh toán</h2>
-            <div class="payment-tabs" role="tablist" aria-label="Chọn phương thức thanh toán">
-              <button type="button" class="payment-tab-btn active" id="tab-btn-card" role="tab" aria-selected="true" aria-controls="tab-content-card">Thẻ ngân hàng</button> <!-- Hiện trường thẻ và bật kiểm tra thẻ. -->
-              <button type="button" class="payment-tab-btn" id="tab-btn-bank" role="tab" aria-selected="false" aria-controls="tab-content-bank">Chuyển khoản</button> <!-- Hiện QR và bỏ qua kiểm tra trường thẻ. -->
-            </div>
-
-            <div id="tab-content-card" class="tab-pane" role="tabpanel" aria-labelledby="tab-btn-card">
-              <div class="card-preview" aria-hidden="true">
-                <span id="card-display-bank">NGÂN HÀNG</span>
-                <strong id="card-display-number">•••• •••• •••• ••••</strong>
-                <span id="card-display-name">NGUYEN VAN A</span>
-                <span id="card-display-expiry">12/28</span>
-                <span id="card-display-brand">VISA</span>
-              </div>
-              <!-- Các ID card-* được donate.js dùng để định dạng bản xem trước; khi gửi bằng thẻ, số thẻ/tên/ngày hết hạn/CVV được kiểm tra. -->
-              <div class="form-grid">
-                <div class="form-group form-group-full">
-                  <label for="card-bank-select">Ngân hàng phát hành</label>
-                  <select id="card-bank-select" class="form-input"> <!-- Chọn ngân hàng phát hành thẻ. -->
-                    <option value="Vietcombank">Vietcombank</option>
-                    <option value="MB Bank">MB Bank</option>
-                    <option value="Techcombank">Techcombank</option>
-                    <option value="BIDV">BIDV</option>
-                    <option value="ACB">ACB</option>
-                    <option value="VPBank">VPBank</option>
-                    <option value="TPBank">TPBank</option>
-                    <option value="VietinBank">VietinBank</option>
-                    <option value="International Bank">Ngân hàng khác</option>
-                  </select>
-                </div>
-                <div class="form-group form-group-full">
-                  <label for="card-number-input">Số thẻ <span class="required-dot">*</span> <span id="detected-card-brand"></span></label>
-                  <input type="text" id="card-number-input" class="form-input" placeholder="16 chữ số" maxlength="19" inputmode="numeric" required> <!-- JS định dạng theo nhóm bốn số và kiểm tra đủ 16 số. -->
-                  <p class="form-error-msg" id="error-card-number">Vui lòng nhập số thẻ hợp lệ (16 chữ số).</p> <!-- Vùng báo lỗi số thẻ. -->
-                </div>
-                <div class="form-group form-group-full">
-                  <label for="card-holder-input">Tên in trên thẻ <span class="required-dot">*</span></label>
-                  <input type="text" id="card-holder-input" class="form-input" placeholder="NGUYEN VAN A" maxlength="30" required> <!-- Tên được bỏ dấu/viết hoa và đồng bộ lên thẻ xem trước. -->
-                  <p class="form-error-msg" id="error-card-holder">Vui lòng nhập tên in trên thẻ.</p> <!-- Vùng báo lỗi tên chủ thẻ. -->
-                </div>
-                <div class="form-group">
-                  <label for="card-expiry-input">Ngày hết hạn <span class="required-dot">*</span></label>
-                  <input type="text" id="card-expiry-input" class="form-input" placeholder="MM/YY" maxlength="5" inputmode="numeric" required> <!-- JS tự thêm dấu / giữa tháng và năm. -->
-                  <p class="form-error-msg" id="error-card-expiry">Ngày hết hạn không hợp lệ.</p> <!-- Vùng báo lỗi ngày hết hạn. -->
-                </div>
-                <div class="form-group">
-                  <label for="card-cvv-input">CVV / CVC <span class="required-dot">*</span></label>
-                  <input type="password" id="card-cvv-input" class="form-input" placeholder="•••" maxlength="4" inputmode="numeric" required> <!-- CVV chỉ được kiểm tra độ dài trong bản demo. -->
-                  <p class="form-error-msg" id="error-card-cvv">Vui lòng nhập mã CVV/CVC gồm 3 hoặc 4 số.</p> <!-- Vùng báo lỗi CVV. -->
-                </div>
-              </div>
-            </div>
-
-            <!-- Hai vùng thanh toán được donate.js bật/tắt theo tab đang chọn. -->
-            <!-- Khi chọn chuyển khoản, QR và nội dung chuyển khoản được cập nhật theo khoản tiền; nút Sao chép lấy nội dung từ các ID bank-*. -->
-            <div id="tab-content-bank" class="tab-pane" role="tabpanel" aria-labelledby="tab-btn-bank" style="display: none;">
-              <div class="bank-transfer-panel"> <!-- Khu vực hướng dẫn chuyển khoản ngân hàng. -->
-                <img id="vietqr-image" class="qr-image" src="" alt="Mã QR chuyển khoản"> <!-- JS gán URL VietQR theo số tiền/nội dung. -->
-                <p>Quét mã bằng ứng dụng ngân hàng hoặc chuyển khoản theo thông tin dưới đây.</p>
-                <dl class="bank-details">
-                  <div><dt>Ngân hàng</dt><dd>MB Bank</dd></div>
-                  <div>
-                    <dt>Số tài khoản</dt>
-                    <dd><span id="bank-acc-num">999988886868</span><button type="button" class="copy-btn" id="btn-copy-acc">Sao chép</button></dd> <!-- Nút sao chép đọc số tài khoản từ ID bank-acc-num. -->
-                  </div>
-                  <div><dt>Chủ tài khoản</dt><dd>QUY CUU TRO HAN HAN WATER FOR AFRICA</dd></div>
-                  <div><dt>Số tiền</dt><dd id="bank-transfer-amount">500.000 ₫</dd></div> <!-- JS đồng bộ số tiền và quy đổi USD sang VNĐ. -->
-                  <div>
-                    <dt>Nội dung chuyển khoản</dt>
-                    <dd><span id="bank-transfer-memo">WFA HANHAN 8921</span><button type="button" class="copy-btn" id="btn-copy-memo">Sao chép</button></dd> <!-- Mã được tạo ngẫu nhiên và có thể sao chép. -->
-                  </div>
-                </dl>
-              </div>
-            </div>
+            <h2 id="payment-title">Quyên góp mô phỏng</h2>
+            <p class="demo-payment-note">Đây là sản phẩm demo: không nhận thanh toán, không cần nhập thông tin thẻ và không có chuyển khoản thật. Khi xác nhận, trang chỉ lưu lượt ủng hộ mẫu trong trình duyệt của bạn.</p>
           </section>
 
           <details class="test-fill">
@@ -192,7 +112,7 @@
           <div class="order-summary">
             <h2>Tóm tắt đóng góp</h2>
             <p><span>Mức đóng góp</span><strong id="summary-chosen-amount">500.000 ₫</strong></p> <!-- Mức tiền đang chọn. -->
-            <p><span>Hình thức</span><span id="summary-chosen-freq">Ủng hộ một lần</span></p> <!-- Tần suất đang chọn. -->
+            <p><span>Hình thức</span><span id="summary-chosen-freq">Ủng hộ một lần</span></p> <!-- Lựa chọn một lần/hàng tháng mô phỏng. -->
             <p class="summary-total"><span>Tổng cộng</span><strong id="summary-total-display">500.000 ₫</strong></p> <!-- Tổng được đồng bộ từ mức đóng góp. -->
           </div>
 
@@ -200,7 +120,7 @@
             <span id="submit-btn-text">Xác nhận ủng hộ 500.000 ₫</span>
             <span aria-hidden="true">→</span>
           </button>
-          <p class="form-note">Đây là bản mô phỏng: không xử lý thanh toán thật; dữ liệu chỉ được lưu trong trình duyệt.</p>
+          <p class="form-note">Không có khoản tiền thật được chuyển. Tên, lời nhắn và số liệu thử chỉ phục vụ minh họa trên thiết bị này.</p>
         </form>
       </section>
 
@@ -221,10 +141,9 @@
       <p>Mã tham chiếu: <strong id="receipt-code">WFA-2026-89472</strong></p> <!-- JS thay bằng mã mô phỏng vừa tạo. -->
       <dl class="receipt-details">
         <div><dt>Người ủng hộ</dt><dd id="receipt-donor-name">Nguyễn Văn An</dd></div> <!-- Tên thật hoặc nhãn ẩn danh. -->
-        <div><dt>Email</dt><dd id="receipt-donor-email">ban@example.com</dd></div> <!-- Email người ủng hộ. -->
         <div><dt>Số tiền</dt><dd id="receipt-amount">500.000 ₫</dd></div> <!-- Khoản đóng góp. -->
         <div><dt>Hình thức</dt><dd id="receipt-frequency">Ủng hộ một lần</dd></div> <!-- Một lần hoặc hàng tháng. -->
-        <div><dt>Thanh toán</dt><dd id="receipt-payment-method">Thẻ ngân hàng</dd></div> <!-- Thẻ hoặc chuyển khoản. -->
+        <div><dt>Trạng thái</dt><dd>Chỉ mô phỏng, chưa thanh toán</dd></div>
         <div><dt>Thời gian</dt><dd id="receipt-timestamp">--</dd></div> <!-- Thời điểm tạo biên lai. -->
       </dl>
       <div class="receipt-actions">

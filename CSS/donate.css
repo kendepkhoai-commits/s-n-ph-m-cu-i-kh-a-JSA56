@@ -457,77 +457,21 @@ textarea.form-input {
 	accent-color: var(--accent);
 }
 
-.payment-tabs {
-	display: flex;
-	gap: 8px;
-	margin-bottom: 16px;
-}
-
-.payment-tab-btn {
-	min-height: 40px;
-	flex: 1;
-	padding: 8px 10px;
-	border: 1px solid var(--line);
-	background: var(--white);
+.demo-payment-note {
+	margin: 0;
+	padding: 14px 16px;
+	border-left: 3px solid var(--accent);
+	background: #f3eadb;
 	color: var(--muted);
 	font-size: 12px;
-	font-weight: 650;
-	cursor: pointer;
+	line-height: 1.6;
 }
 
-.payment-tab-btn.active {
-	border-color: var(--accent);
-	background: var(--soft-accent);
-	color: var(--accent-dark);
-}
-
-.card-preview {
-	display: grid;
-	grid-template-columns: 1fr auto;
-	gap: 8px 14px;
-	margin-bottom: 16px;
-	padding: 15px 17px;
-	background: #eadfce;
-	color: var(--ink);
-	font-size: 10px;
-}
-
-.card-preview strong {
-	grid-column: 1 / -1;
-	font-size: 17px;
-	letter-spacing: 1px;
-}
-
-.card-preview span:nth-of-type(3) {
-	text-align: right;
-}
-
-#detected-card-brand {
-	color: var(--accent);
-	font-size: 11px;
-	font-weight: 700;
-}
-
-.bank-transfer-panel > p {
-	color: var(--muted);
-	font-size: 12px;
-}
-
-.qr-image {
-	width: 160px;
-	min-height: 160px;
-	display: block;
-	margin: 0 auto 10px;
-	object-fit: contain;
-}
-
-.bank-details,
 .receipt-details {
 	margin: 16px 0;
 	border-top: 1px solid var(--line);
 }
 
-.bank-details > div,
 .receipt-details > div {
 	display: flex;
 	justify-content: space-between;
@@ -536,13 +480,11 @@ textarea.form-input {
 	border-bottom: 1px solid var(--line);
 }
 
-.bank-details dt,
 .receipt-details dt {
 	color: var(--muted);
 	font-size: 12px;
 }
 
-.bank-details dd,
 .receipt-details dd {
 	display: flex;
 	align-items: center;
@@ -554,7 +496,6 @@ textarea.form-input {
 	overflow-wrap: anywhere;
 }
 
-.copy-btn,
 .test-fill button,
 .secondary-button {
 	min-height: 30px;
@@ -922,16 +863,10 @@ textarea.form-input {
 		grid-column: auto;
 	}
 
-	.payment-tabs {
-		flex-direction: column;
-	}
-
-	.bank-details > div,
 	.receipt-details > div {
 		align-items: flex-start;
 	}
 
-	.bank-details dd,
 	.receipt-details dd {
 		max-width: 62%;
 	}
