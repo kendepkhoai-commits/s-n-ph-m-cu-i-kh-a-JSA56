@@ -547,7 +547,7 @@ function validateForm() {
 	// Chỉ kiểm tra thông tin thẻ khi người dùng chọn thanh toán bằng thẻ.
 	if (activePaymentTab === "card") {
 		const rawDigits = cardNumberInput.value.replace(/\D/g, ""); // Bỏ khoảng trắng để chỉ đếm chữ số thẻ.
-		if (rawDigits.length !== 16 || !isValidCardNumber(rawDigits)) {
+		if (rawDigits.length !== 16 ) {
 			document.querySelector("#error-card-number").classList.add("visible"); // Hiện lỗi số thẻ.
 			cardNumberInput.classList.add("is-invalid"); // Đánh dấu ô số thẻ bị lỗi.
 			isValid = false; // Ghi nhận biểu mẫu chưa hợp lệ.
