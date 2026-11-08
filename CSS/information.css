@@ -1,4 +1,5 @@
 :root {
+	/* Bảng màu dùng chung cho trang thống kê và các biểu đồ. */
 	color-scheme: light;
 	--paper: #f5ecdc;
 	--ink: #382a20;
@@ -10,14 +11,17 @@
 }
 
 * {
+	/* Tính kích thước phần tử bao gồm cả padding và đường viền. */
 	box-sizing: border-box;
 }
 
 html {
+	/* Cuộn tới liên kết neo một cách mượt mà. */
 	scroll-behavior: smooth;
 }
 
 body.information-page {
+	/* Nền, màu chữ và phông chữ mặc định của trang thông tin. */
 	margin: 0;
 	background: var(--paper);
 	color: var(--ink);
@@ -25,9 +29,11 @@ body.information-page {
 }
 
 a {
+	/* Liên kết kế thừa màu chữ của khu vực chứa nó. */
 	color: inherit;
 }
 
+/* Giới hạn bề rộng và căn giữa các vùng chính theo cùng một lề. */
 .info-header,
 .information-main,
 .info-footer {
@@ -36,6 +42,7 @@ a {
 }
 
 .info-header {
+	/* Thanh đầu trang chứa liên kết quay lại và thương hiệu. */
 	min-height: 72px;
 	display: flex;
 	align-items: center;
@@ -46,36 +53,43 @@ a {
 .back-link,
 .info-brand,
 .info-footer a {
+	/* Kiểu chữ gọn cho các liên kết điều hướng và thương hiệu. */
 	font-size: 12px;
 	font-weight: 750;
 	text-decoration: none;
 }
 
 .back-link {
+	/* Căn biểu tượng và nhãn liên kết quay lại trên cùng một hàng. */
 	display: inline-flex;
 	align-items: center;
 	gap: 9px;
 }
 
 .back-link span {
+	/* Làm biểu tượng quay lại nổi bật hơn chữ bên cạnh. */
 	font-size: 18px;
 }
 
 .info-brand,
 .info-footer a {
+	/* Dùng màu nhấn cho tên thương hiệu và liên kết cuối trang. */
 	color: var(--rust);
 }
 
 .information-main {
+	/* Chừa khoảng trống giữa nội dung chính và chân trang. */
 	padding-bottom: 76px;
 }
 
 .info-hero {
+	/* Giới hạn chiều rộng và tạo khoảng thở cho phần giới thiệu. */
 	max-width: 850px;
 	padding: 76px 0 36px;
 }
 
 .info-eyebrow {
+	/* Nhãn nhỏ phía trên tiêu đề, dùng màu nhấn và chữ in hoa. */
 	margin: 0 0 16px;
 	color: var(--rust);
 	font-size: 12px;
@@ -87,11 +101,13 @@ a {
 .chart-heading h2,
 .insight-section h2,
 .method-note h2 {
+	/* Đồng nhất phông serif cho các tiêu đề mang tính biên tập. */
 	font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
 	font-weight: 500;
 }
 
 .info-hero h1 {
+	/* Tiêu đề chính lớn, sát dòng và không vượt quá chiều rộng nội dung. */
 	max-width: 790px;
 	margin: 0;
 	font-size: 64px;
@@ -99,6 +115,7 @@ a {
 }
 
 .info-lead {
+	/* Đoạn dẫn có độ rộng và giãn dòng dễ đọc. */
 	max-width: 700px;
 	margin: 22px 0 0;
 	color: var(--muted);
@@ -108,25 +125,30 @@ a {
 
 .data-status,
 .data-error {
+	/* Vùng trạng thái tải dữ liệu và thông báo lỗi. */
 	margin: 20px 0 0;
 	font-size: 12px;
 }
 
 .data-status {
+	/* Trạng thái thông thường hiển thị bằng màu chữ phụ. */
 	color: var(--muted);
 }
 
 .data-error {
+	/* Lỗi dữ liệu được tô đỏ để dễ nhận biết. */
 	color: #9d2f20;
 }
 
 .summary-grid {
+	/* Lưới bốn chỉ số tổng quan, có đường viền ngang phân cách. */
 	display: grid;
 	grid-template-columns: repeat(4, minmax(0, 1fr));
 	border-block: 1px solid var(--line);
 }
 
 .summary-item {
+	/* Căn giữa nội dung mỗi chỉ số và chia các ô bằng đường viền. */
 	min-height: 150px;
 	display: flex;
 	flex-direction: column;
@@ -138,15 +160,18 @@ a {
 }
 
 .summary-item:first-child {
+	/* Ô đầu căn thẳng với mép trái của lưới. */
 	padding-left: 0;
 }
 
 .summary-item:last-child {
+	/* Bỏ đường viền ngoài cùng bên phải của ô cuối. */
 	border-right: 0;
 }
 
 .summary-item p,
 .summary-item span {
+	/* Chú thích ngắn dưới hoặc cạnh các con số tổng quan. */
 	margin: 0;
 	color: var(--muted);
 	font-size: 11px;
@@ -154,16 +179,19 @@ a {
 }
 
 .summary-item strong {
+	/* Số liệu lớn dùng chữ số có độ rộng ổn định. */
 	font: 600 27px/1.1 "Segoe UI", Tahoma, sans-serif;
 	font-variant-numeric: tabular-nums;
 }
 
 .summary-total strong {
+	/* Nhấn mạnh chỉ số tổng bằng màu và cỡ chữ lớn hơn. */
 	color: var(--rust);
 	font-size: 32px;
 }
 
 .chart-section {
+	/* Chia phần tiêu đề và biểu đồ thành hai cột trên màn hình rộng. */
 	display: grid;
 	grid-template-columns: minmax(245px, .75fr) minmax(0, 1.25fr);
 	gap: 48px;
@@ -172,12 +200,14 @@ a {
 }
 
 .chart-heading {
+	/* Xếp số thứ tự và tiêu đề biểu đồ theo hàng ngang. */
 	display: flex;
 	align-items: flex-start;
 	gap: 17px;
 }
 
 .chart-index {
+	/* Số thứ tự nhỏ làm dấu hiệu nhận biết từng biểu đồ. */
 	padding-top: 7px;
 	color: var(--rust);
 	font-size: 11px;
@@ -185,12 +215,14 @@ a {
 }
 
 .chart-heading h2 {
+	/* Tiêu đề biểu đồ với cỡ chữ và giãn dòng rõ ràng. */
 	margin: 0;
 	font-size: 27px;
 	line-height: 1.15;
 }
 
 .chart-heading p {
+	/* Mô tả phụ nằm ngay dưới tiêu đề biểu đồ. */
 	margin: 10px 0 0;
 	color: var(--muted);
 	font-size: 11px;
@@ -198,6 +230,7 @@ a {
 }
 
 .bar-chart {
+	/* Danh sách cột dữ liệu không dùng dấu đầu dòng mặc định. */
 	display: grid;
 	gap: 11px;
 	margin: 0;
@@ -206,6 +239,7 @@ a {
 }
 
 .bar-row {
+	/* Mỗi dòng gồm tên quốc gia, thanh dữ liệu và trị số. */
 	min-height: 22px;
 	display: grid;
 	grid-template-columns: minmax(120px, 1.1fr) minmax(90px, 1.5fr) minmax(76px, auto);
@@ -214,11 +248,13 @@ a {
 }
 
 .bar-country {
+	/* Nhãn quốc gia cạnh mỗi thanh biểu đồ. */
 	font-size: 11px;
 	line-height: 1.25;
 }
 
 .bar-country small {
+	/* Thông tin phụ nhỏ hơn nằm dưới tên quốc gia. */
 	display: block;
 	margin-top: 2px;
 	color: var(--muted);
@@ -226,12 +262,14 @@ a {
 }
 
 .bar-track {
+	/* Rãnh nền cố định để thể hiện phần trăm của mỗi thanh. */
 	height: 10px;
 	overflow: hidden;
 	background: #e7d9c4;
 }
 
 .bar-fill {
+	/* Phần tô của thanh; độ rộng được JavaScript đặt theo dữ liệu. */
 	/* JavaScript đặt --bar-width theo giá trị dữ liệu để các cột cùng thang đo. */
 	width: var(--bar-width);
 	height: 100%;
@@ -240,14 +278,17 @@ a {
 }
 
 .bar-chart-population .bar-fill {
+	/* Màu riêng phân biệt biểu đồ dân số. */
 	background: var(--gold);
 }
 
 .bar-chart-mortality .bar-fill {
+	/* Màu riêng phân biệt biểu đồ tỷ lệ tử vong. */
 	background: var(--green);
 }
 
 .bar-value {
+	/* Căn trị số về bên phải để tiện so sánh giữa các hàng. */
 	text-align: right;
 	font-size: 11px;
 	font-weight: 750;
@@ -255,11 +296,13 @@ a {
 }
 
 .empty-chart {
+	/* Thông báo thay thế khi biểu đồ chưa có dữ liệu. */
 	color: var(--muted);
 	font-size: 12px;
 }
 
 .insight-section {
+	/* Khối nền tương phản chứa phần nhận định chính. */
 	margin-top: 72px;
 	padding: 36px clamp(24px, 6vw, 72px);
 	background: #713321;
@@ -267,15 +310,18 @@ a {
 }
 
 .insight-section .info-eyebrow {
+	/* Đổi màu nhãn nhỏ để đủ tương phản trên nền tối. */
 	color: #f0cf87;
 }
 
 .insight-section h2 {
+	/* Tiêu đề của khối nhận định. */
 	margin: 0 0 22px;
 	font-size: 36px;
 }
 
 .insight-section > p:not(.info-eyebrow) {
+	/* Nội dung nhận định có chiều rộng và độ tương phản dễ đọc. */
 	max-width: 880px;
 	margin: 12px 0 0;
 	color: #f5e7d1;
@@ -284,16 +330,19 @@ a {
 }
 
 .method-note {
+	/* Giới hạn chiều rộng phần ghi chú phương pháp. */
 	max-width: 850px;
 	padding-top: 54px;
 }
 
 .method-note h2 {
+	/* Tiêu đề nhỏ hơn cho phần giải thích cách tính. */
 	margin: 0 0 15px;
 	font-size: 25px;
 }
 
 .method-note p {
+	/* Các ghi chú phương pháp dùng chữ nhỏ và giãn dòng thoáng. */
 	margin: 10px 0 0;
 	color: var(--muted);
 	font-size: 11px;
@@ -301,11 +350,13 @@ a {
 }
 
 .source-links a {
+	/* Làm rõ liên kết nguồn dữ liệu bằng màu và khoảng cách gạch chân. */
 	color: var(--rust);
 	text-underline-offset: 3px;
 }
 
 .info-footer {
+	/* Chân trang chứa ghi chú và liên kết nguồn. */
 	min-height: 68px;
 	display: flex;
 	align-items: center;
@@ -318,11 +369,13 @@ a {
 
 @media (max-width: 850px) {
 	/* Trên tablet, chuyển các chỉ số thành hai cột và đưa biểu đồ xuống dưới tiêu đề. */
+	/* Giảm cỡ tiêu đề để phù hợp với không gian màn hình hẹp hơn. */
 	.info-hero h1 {
 		font-size: 54px;
 	}
 
 	.summary-grid {
+		/* Chuyển bốn chỉ số thành hai cột. */
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 
@@ -333,6 +386,7 @@ a {
 
 	.summary-item:nth-child(3),
 	.summary-item:nth-child(4) {
+		/* Tạo đường phân cách ngang cho hàng chỉ số thứ hai. */
 		border-top: 1px solid var(--line);
 	}
 
@@ -342,6 +396,7 @@ a {
 	}
 
 	.chart-section {
+		/* Đặt phần tiêu đề và biểu đồ thành hai hàng. */
 		grid-template-columns: 1fr;
 		gap: 24px;
 	}
@@ -356,22 +411,27 @@ a {
 	}
 
 	.info-header {
+		/* Thu gọn chiều cao thanh đầu trang trên điện thoại. */
 		min-height: 62px;
 	}
 
 	.info-hero {
+		/* Giảm khoảng đệm phần giới thiệu. */
 		padding: 56px 0 28px;
 	}
 
 	.info-hero h1 {
+		/* Thu nhỏ tiêu đề chính để vừa màn hình điện thoại. */
 		font-size: 42px;
 	}
 
 	.info-lead {
+		/* Giảm nhẹ chữ đoạn dẫn trên màn hình nhỏ. */
 		font-size: 14px;
 	}
 
 	.summary-item {
+		/* Làm các ô chỉ số thấp và gọn hơn. */
 		min-height: 132px;
 		padding: 16px 12px;
 	}
@@ -382,50 +442,61 @@ a {
 	}
 
 	.summary-item strong {
+		/* Giảm cỡ con số để vừa ô chỉ số hẹp. */
 		font-size: 21px;
 	}
 
 	.summary-total strong {
+		/* Điều chỉnh riêng số tổng nổi bật cho bố cục di động. */
 		font-size: 25px;
 	}
 
 	.chart-section {
+		/* Thu nhỏ khoảng cách và đệm của khu vực biểu đồ. */
 		gap: 19px;
 		padding: 32px 0;
 	}
 
 	.chart-heading h2 {
+		/* Thu gọn tiêu đề biểu đồ. */
 		font-size: 24px;
 	}
 
 	.bar-chart {
+		/* Tăng chút khoảng cách giữa các hàng để dễ phân biệt. */
 		gap: 13px;
 	}
 
 	.bar-row {
+		/* Thu hẹp cột nhãn, thanh và trị số cho màn hình nhỏ. */
 		grid-template-columns: minmax(90px, 1fr) minmax(45px, .8fr) minmax(70px, auto);
 		gap: 8px;
 	}
 
 	.bar-country,
 	.bar-value {
+		/* Giảm cỡ chữ của nhãn và số liệu trong biểu đồ. */
 		font-size: 10px;
 	}
 
 	.bar-track {
+		/* Làm thanh dữ liệu mảnh hơn trên điện thoại. */
 		height: 9px;
 	}
 
 	.insight-section {
+		/* Thu nhỏ khoảng cách quanh khối nhận định. */
 		margin-top: 48px;
 		padding: 28px 22px;
 	}
 
 	.insight-section h2 {
+		/* Thu gọn tiêu đề khối nhận định. */
 		font-size: 30px;
 	}
 
 	.info-footer {
+		/* Xếp nội dung chân trang thành cột để tránh chật ngang. */
 		align-items: flex-start;
 		flex-direction: column;
 		justify-content: center;
@@ -435,6 +506,7 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
+	/* Tắt cuộn mượt khi người dùng yêu cầu giảm chuyển động. */
 	html {
 		scroll-behavior: auto;
 	}

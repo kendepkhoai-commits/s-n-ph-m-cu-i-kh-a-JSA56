@@ -1,4 +1,5 @@
 :root {
+	/* Bảng màu dùng xuyên suốt trang chính. */
 	color-scheme: light;
 	--forest: #a8472d;
 	--forest-deep: #713321;
@@ -11,15 +12,18 @@
 }
 
 * {
+	/* Tính padding và viền bên trong kích thước khai báo. */
 	box-sizing: border-box;
 }
 
 html {
+	/* Cuộn mượt và chừa chỗ cho thanh điều hướng khi tới liên kết neo. */
 	scroll-behavior: smooth;
 	scroll-padding-top: 100px;
 }
 
 body.menu-page {
+	/* Kiểu nền, chữ và màu mặc định của trang menu. */
 	margin: 0;
 	background: var(--paper);
 	color: var(--ink);
@@ -27,11 +31,13 @@ body.menu-page {
 }
 
 a {
+	/* Liên kết kế thừa màu chữ từ thành phần cha. */
 	color: inherit;
 }
 
 .site-header {
 	/* Thanh điều hướng nổi khi cuộn; khoảng âm bù lại khoảng trống của phần tử sticky. */
+	/* Bố trí thương hiệu, liên kết và công cụ tài khoản trên cùng một thanh. */
 	position: sticky;
 	top: 12px;
 	z-index: 5;
@@ -52,6 +58,7 @@ a {
 
 .navbar-toggle {
 	/* Nút vẫn đứng giữa màn hình khi thanh điều hướng được ẩn hoặc hiện. */
+	/* Nút cố định dùng để bật/tắt thanh điều hướng. */
 	position: fixed;
 	top: 76px;
 	left: 50%;
@@ -72,25 +79,30 @@ a {
 }
 
 .navbar-toggle:hover {
+	/* Làm sáng nút điều hướng khi rê chuột. */
 	background: white;
 }
 
 .navbar-toggle span {
+	/* Định cỡ biểu tượng bên trong nút bật/tắt. */
 	font-size: 19px;
 	line-height: 1;
 }
 
 .navbar-toggle:focus-visible {
+	/* Viền dễ thấy khi điều khiển nút bằng bàn phím. */
 	outline: 3px solid var(--clay);
 	outline-offset: 3px;
 }
 
 body.navbar-hidden .site-header {
+	/* Đẩy thanh điều hướng ra ngoài màn hình khi trạng thái bị ẩn. */
 	transform: translateY(calc(-100% - 20px));
 	pointer-events: none;
 }
 
 .brand {
+	/* Xếp biểu tượng thương hiệu cạnh tên và khẩu hiệu. */
 	display: inline-flex;
 	flex: 0 0 auto;
 	align-items: center;
@@ -99,6 +111,7 @@ body.navbar-hidden .site-header {
 }
 
 .brand-mark {
+	/* Huy hiệu tròn chứa ký hiệu thương hiệu. */
 	width: 38px;
 	aspect-ratio: 1;
 	display: grid;
@@ -110,29 +123,34 @@ body.navbar-hidden .site-header {
 }
 
 .brand-copy {
+	/* Xếp tên thương hiệu và khẩu hiệu thành hai dòng. */
 	display: grid;
 	gap: 3px;
 }
 
 .brand-copy strong,
 .site-footer a {
+	/* Làm đậm tên thương hiệu và liên kết chân trang. */
 	font-size: 14px;
 	font-weight: 800;
 }
 
 .brand-copy small {
+	/* Hiển thị khẩu hiệu bằng chữ nhỏ và màu phụ. */
 	color: var(--muted);
 	font-size: 10px;
 }
 
 .main-nav,
 .account-tools {
+	/* Căn các liên kết điều hướng và công cụ tài khoản theo hàng ngang. */
 	display: flex;
 	align-items: center;
 	gap: 22px;
 }
 
 .main-nav a {
+	/* Kiểu chữ và bỏ gạch chân cho các liên kết menu. */
 	font-size: 13px;
 	font-weight: 650;
 	text-decoration: none;
@@ -140,34 +158,41 @@ body.navbar-hidden .site-header {
 
 .main-nav a:hover,
 .site-footer a:hover {
+	/* Màu nhấn khi rê chuột lên liên kết. */
 	color: var(--clay);
 }
 
 .main-nav .donate-link {
+	/* Tạo nút quyên góp nổi bật trong thanh menu. */
 	padding: 11px 14px;
 	background: var(--forest);
 	color: white;
 }
 
 .main-nav .donate-link:hover {
+	/* Tăng tương phản nút quyên góp khi rê chuột. */
 	background: var(--forest-deep);
 	color: white;
 }
 
 .account-tools {
+	/* Giữ khoảng cách riêng giữa lời chào và nút đăng xuất. */
 	gap: 12px;
 }
 
 .account-greeting {
+	/* Thông tin chào mừng người dùng bằng màu chữ phụ. */
 	color: var(--muted);
 	font-size: 11px;
 }
 
 .account-greeting strong {
+	/* Nhấn mạnh tên người dùng trong lời chào. */
 	color: var(--ink);
 }
 
 .logout-button {
+	/* Nút đăng xuất kiểu viền nhẹ. */
 	min-height: 36px;
 	padding: 0 11px;
 	border: 1px solid var(--line);
@@ -179,10 +204,12 @@ body.navbar-hidden .site-header {
 }
 
 .logout-button:hover {
+	/* Đổi màu viền nút đăng xuất khi rê chuột. */
 	border-color: var(--forest);
 }
 
 .hero {
+	/* Khối mở đầu dùng ảnh nền, với nội dung căn giữa theo chiều dọc. */
 	position: relative;
 	width: min(calc(100% - 40px), 1360px);
 	min-height: min(760px, 100svh);
@@ -206,10 +233,12 @@ body.navbar-hidden .site-header {
 }
 
 .hero > * {
+	/* Đặt nội dung hero phía trên lớp phủ nền. */
 	position: relative;
 }
 
 .eyebrow {
+	/* Nhãn nhỏ in đậm phía trên tiêu đề các khu vực. */
 	margin: 0 0 17px;
 	color: #f3d28f;
 	font-size: 12px;
@@ -221,11 +250,13 @@ body.navbar-hidden .site-header {
 .section-heading h2,
 .about-content h2,
 .donate-section h2 {
+	/* Dùng phông serif thống nhất cho tiêu đề các khu vực nội dung. */
 	font-family: "Palatino Linotype", "Book Antiqua", Georgia, serif;
 	font-weight: 500;
 }
 
 .hero h1 {
+	/* Tiêu đề lớn của phần mở đầu. */
 	max-width: 680px;
 	margin: 0;
 	font-family: "Segoe UI", Tahoma, sans-serif;
@@ -235,6 +266,7 @@ body.navbar-hidden .site-header {
 }
 
 .hero-copy {
+	/* Đoạn giới thiệu giới hạn chiều rộng để dễ đọc. */
 	max-width: 440px;
 	margin: 23px 0 0;
 	color: #edf2e9;
@@ -243,6 +275,7 @@ body.navbar-hidden .site-header {
 }
 
 .hero-caption {
+	/* Chú thích ảnh đặt ở góc dưới bên phải của hero. */
 	position: absolute;
 	right: clamp(24px, 4vw, 56px);
 	bottom: 27px;
@@ -253,6 +286,7 @@ body.navbar-hidden .site-header {
 
 .why-water-intro {
 	/* Chia lời giới thiệu thành hai cột; breakpoint sẽ xếp lại trên điện thoại. */
+	/* Giới hạn chiều rộng và tạo khoảng thở quanh nội dung mở đầu. */
 	width: min(calc(100% - 48px), 1120px);
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -263,15 +297,18 @@ body.navbar-hidden .site-header {
 }
 
 .why-water-intro .eyebrow {
+	/* Dùng màu nhấn cho nhãn của phần giới thiệu. */
 	color: var(--clay);
 }
 
 .why-water-intro h2 {
+	/* Tiêu đề serif lớn của phần giới thiệu. */
 	margin: 0;
 	font: 500 54px/1.05 "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
 
 .why-water-intro > p:last-child {
+	/* Đoạn mô tả nằm ở cột phải trên màn hình rộng. */
 	max-width: 500px;
 	margin: 0 0 5px;
 	color: var(--muted);
@@ -280,6 +317,7 @@ body.navbar-hidden .site-header {
 }
 
 .reason-showcase {
+	/* Khung ảnh minh họa cùng các lựa chọn nội dung tương tác. */
 	position: relative;
 	width: min(calc(100% - 40px), 1360px);
 	height: clamp(460px, 52vw, 690px);
@@ -289,6 +327,7 @@ body.navbar-hidden .site-header {
 }
 
 .reason-image {
+	/* Ảnh phủ kín khung trưng bày mà vẫn giữ tỷ lệ gốc. */
 	position: absolute;
 	inset: 0;
 	width: 100%;
@@ -298,6 +337,7 @@ body.navbar-hidden .site-header {
 }
 
 .reason-tabs {
+	/* Nhóm nút lựa chọn nằm phía trên ảnh. */
 	position: absolute;
 	top: 24px;
 	left: 20px;
@@ -310,6 +350,7 @@ body.navbar-hidden .site-header {
 }
 
 .reason-tab {
+	/* Kiểu nút dạng viên thuốc cho từng lựa chọn. */
 	min-height: 42px;
 	padding: 0 18px;
 	border: 1px solid rgb(56 42 32 / 12%);
@@ -324,22 +365,26 @@ body.navbar-hidden .site-header {
 }
 
 .reason-tab:hover {
+	/* Nâng nhẹ nút để phản hồi thao tác rê chuột. */
 	transform: translateY(-2px);
 }
 
 .reason-tab[aria-pressed="true"] {
+	/* Phân biệt lựa chọn đang hoạt động bằng màu nền đậm. */
 	border-color: var(--forest);
 	background: var(--forest);
 	color: white;
 }
 
 .reason-tab:focus-visible {
+	/* Hiển thị viền focus rõ ràng khi dùng bàn phím. */
 	outline: 3px solid #f0cf87;
 	outline-offset: 3px;
 }
 
 .reason-panel {
 	/* Đặt thẻ nội dung nổi phía trên ảnh, neo ở góc dưới bên phải. */
+	/* Nền sáng giúp nội dung giữ độ tương phản với ảnh. */
 	position: absolute;
 	right: clamp(18px, 4vw, 58px);
 	bottom: clamp(18px, 4vw, 48px);
@@ -350,6 +395,7 @@ body.navbar-hidden .site-header {
 }
 
 .reason-label {
+	/* Nhãn phân loại nhỏ ở đầu thẻ nội dung. */
 	margin: 0 0 10px;
 	color: var(--clay);
 	font-size: 12px;
@@ -358,11 +404,13 @@ body.navbar-hidden .site-header {
 }
 
 .reason-panel h3 {
+	/* Tiêu đề lý do đang được chọn. */
 	margin: 0;
 	font: 500 27px/1.15 "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
 
 .reason-panel > p:last-child {
+	/* Phần mô tả của thẻ lý do. */
 	margin: 12px 0 0;
 	color: #66503d;
 	font-size: 14px;
@@ -370,28 +418,33 @@ body.navbar-hidden .site-header {
 }
 
 .impact-section {
+	/* Khu vực trình bày dữ liệu tác động, căn giữa theo bề rộng trang. */
 	width: min(calc(100% - 48px), 1120px);
 	margin: 0 auto;
 	padding: 104px 0 96px;
 }
 
 .section-heading {
+	/* Giới hạn chiều rộng tiêu đề và tạo khoảng cách với nội dung bên dưới. */
 	max-width: 610px;
 	margin-bottom: 38px;
 }
 
 .section-heading .eyebrow,
 .donate-section .eyebrow {
+	/* Dùng màu nhấn cho nhãn phần tác động và quyên góp. */
 	color: var(--clay);
 }
 
 .section-heading h2 {
+	/* Tiêu đề chính của phần tác động. */
 	margin: 0;
 	font-size: 54px;
 	line-height: 1.05;
 }
 
 .section-heading > p:last-child {
+	/* Mô tả ngắn ngay sau tiêu đề phần. */
 	margin: 13px 0 0;
 	color: var(--muted);
 	font-size: 14px;
@@ -400,6 +453,7 @@ body.navbar-hidden .site-header {
 
 .impact-layout {
 	/* Cột số liệu tóm tắt hẹp hơn danh sách quốc gia; minmax tránh tràn nội dung. */
+	/* Bố cục hai cột cho số liệu tổng quan và dữ liệu theo quốc gia. */
 	display: grid;
 	grid-template-columns: minmax(260px, .85fr) minmax(0, 1.15fr);
 	gap: 54px;
@@ -407,6 +461,7 @@ body.navbar-hidden .site-header {
 }
 
 .impact-summary {
+	/* Thẻ nền màu nhấn chứa con số tác động tổng quan. */
 	min-height: 260px;
 	display: flex;
 	flex-direction: column;
@@ -419,24 +474,29 @@ body.navbar-hidden .site-header {
 
 .summary-label,
 .summary-footnote {
+	/* Kiểu chữ chung cho nhãn và chú thích của số liệu tổng. */
 	font-size: 12px;
 	line-height: 1.5;
 }
 
 .summary-label {
+	/* Màu sáng cho nhãn trên nền đậm. */
 	color: #f3dfbb;
 }
 
 .summary-number {
+	/* Con số tổng lớn làm trọng tâm của thẻ thống kê. */
 	margin: 17px 0 5px;
 	font: 500 68px/.95 "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
 
 .summary-footnote {
+	/* Chú thích sáng dễ đọc bên dưới con số. */
 	color: #f3dfbb;
 }
 
 .summary-meta {
+	/* Hàng thông tin phụ cuối thẻ, phân cách bằng đường kẻ. */
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
@@ -449,10 +509,12 @@ body.navbar-hidden .site-header {
 }
 
 .country-data {
+	/* Vùng danh sách số liệu theo quốc gia. */
 	padding: 10px 0;
 }
 
 .country-heading {
+	/* Tiêu đề danh sách và thông tin phụ trên một hàng. */
 	display: flex;
 	align-items: baseline;
 	justify-content: space-between;
@@ -462,27 +524,32 @@ body.navbar-hidden .site-header {
 }
 
 .country-heading h3 {
+	/* Tiêu đề serif của danh sách quốc gia. */
 	margin: 0;
 	font: 500 24px "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
 
 .country-heading span,
 .data-status {
+	/* Kiểu chữ phụ cho chú giải và trạng thái tải dữ liệu. */
 	color: var(--muted);
 	font-size: 11px;
 }
 
 .data-status:empty {
+	/* Ẩn vùng trạng thái nếu chưa có thông báo. */
 	display: none;
 }
 
 .country-list {
+	/* Bỏ lề và dấu đầu dòng mặc định của danh sách quốc gia. */
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
 .country-list li {
+	/* Mỗi quốc gia và giá trị hiển thị trên một hàng có đường phân cách. */
 	min-height: 48px;
 	display: flex;
 	align-items: center;
@@ -493,11 +560,13 @@ body.navbar-hidden .site-header {
 }
 
 .country-list li strong {
+	/* Tô màu và nhấn mạnh trị số của từng quốc gia. */
 	color: var(--forest);
 	font-size: 14px;
 }
 
 .data-note {
+	/* Ghi chú nguồn hoặc phạm vi dữ liệu dưới danh sách. */
 	max-width: 830px;
 	margin: 28px 0 10px;
 	color: var(--muted);
@@ -506,6 +575,7 @@ body.navbar-hidden .site-header {
 }
 
 .source-link {
+	/* Kiểu liên kết nguồn dữ liệu, có gạch chân dễ nhận biết. */
 	color: var(--forest);
 	font-size: 11px;
 	font-weight: 700;
@@ -514,6 +584,7 @@ body.navbar-hidden .site-header {
 }
 
 .fact-section {
+	/* Khối nêu một dữ kiện nổi bật, gồm nội dung và năm trang trí. */
 	width: min(calc(100% - 40px), 1360px);
 	min-height: 390px;
 	display: grid;
@@ -527,10 +598,12 @@ body.navbar-hidden .site-header {
 }
 
 .fact-copy {
+	/* Giới hạn chiều rộng phần chữ trong khối dữ kiện. */
 	max-width: 790px;
 }
 
 .fact-kicker {
+	/* Nhãn nhỏ màu sáng phía trên nội dung dữ kiện. */
 	margin: 0 0 18px;
 	color: #f0cf87;
 	font-size: 13px;
@@ -539,16 +612,19 @@ body.navbar-hidden .site-header {
 }
 
 .fact-copy h2 {
+	/* Tiêu đề của dữ kiện nổi bật. */
 	margin: 0;
 	font: 450 42px/1.16 "Segoe UI", Tahoma, sans-serif;
 }
 
 .fact-copy h2 strong {
+	/* Tô màu và làm đậm cụm từ cần nhấn trong tiêu đề. */
 	color: #f0cf87;
 	font-weight: 750;
 }
 
 .fact-copy > p:not(.fact-kicker) {
+	/* Đoạn giải thích bên dưới tiêu đề dữ kiện. */
 	max-width: 700px;
 	margin: 20px 0 0;
 	color: #f6eadd;
@@ -557,6 +633,7 @@ body.navbar-hidden .site-header {
 }
 
 .fact-link {
+	/* Liên kết hành động dạng nút trong khối dữ kiện. */
 	min-height: 48px;
 	display: inline-flex;
 	align-items: center;
@@ -571,17 +648,20 @@ body.navbar-hidden .site-header {
 }
 
 .fact-link:hover {
+	/* Làm sáng nút liên kết khi rê chuột. */
 	background: white;
 }
 
 .fact-year {
 	/* Năm lớn là chi tiết trang trí, không được phép chiếm cột rộng cố định. */
+	/* Hiển thị năm mờ làm yếu tố trang trí bên cạnh dữ kiện. */
 	color: rgb(255 255 255 / 16%);
 	font: 500 clamp(54px, 9vw, 130px)/1 "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
 
 .about-section {
 	/* Lề ngang co giãn theo viewport nhưng giữ nội dung trong bề rộng chung 1120px. */
+	/* Chia phần giới thiệu thành số thứ tự, nội dung và câu trích dẫn. */
 	display: grid;
 	grid-template-columns: .65fr 1.45fr .8fr;
 	align-items: start;
@@ -591,6 +671,7 @@ body.navbar-hidden .site-header {
 }
 
 .about-index {
+	/* Nhãn số thứ tự của phần giới thiệu. */
 	padding-top: 8px;
 	color: var(--forest);
 	font-size: 12px;
@@ -599,6 +680,7 @@ body.navbar-hidden .site-header {
 }
 
 .about-content h2 {
+	/* Tiêu đề giới thiệu với chiều rộng giới hạn. */
 	max-width: 620px;
 	margin: 0;
 	font-size: 47px;
@@ -606,6 +688,7 @@ body.navbar-hidden .site-header {
 }
 
 .about-content p {
+	/* Nội dung giới thiệu dùng màu dịu và giãn dòng rộng. */
 	max-width: 600px;
 	margin: 20px 0 0;
 	color: #66503d;
@@ -614,6 +697,7 @@ body.navbar-hidden .site-header {
 }
 
 .about-statement {
+	/* Câu thông điệp ngắn ở cuối cột, có đường gạch phía trên. */
 	align-self: end;
 	padding-top: 12px;
 	border-top: 1px solid rgb(91 55 34 / 35%);
@@ -622,22 +706,26 @@ body.navbar-hidden .site-header {
 }
 
 .video-section {
+	/* Khu vực video được căn giữa theo lề nội dung chung. */
 	width: min(calc(100% - 48px), 1120px);
 	margin: 0 auto;
 	padding: 72px 0 56px;
 }
 
 .video-section .eyebrow {
+	/* Khoảng cách và màu nhãn phía trên video. */
 	margin-bottom: 10px;
 	color: var(--clay);
 }
 
 .video-section h2 {
+	/* Tiêu đề video dùng phông serif. */
 	margin: 0 0 24px;
 	font: 500 38px/1.12 "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
 
 .video-frame {
+	/* Khung video rộng theo vùng chứa, giữ tỷ lệ 16:9. */
 	width: 100%;
 	/* Giữ khung video đúng tỷ lệ 16:9 khi chiều rộng thay đổi. */
 	aspect-ratio: 16 / 9;
@@ -645,6 +733,7 @@ body.navbar-hidden .site-header {
 }
 
 .video-frame iframe {
+	/* Cho iframe phủ kín khung video và bỏ viền mặc định. */
 	width: 100%;
 	height: 100%;
 	display: block;
@@ -652,6 +741,7 @@ body.navbar-hidden .site-header {
 }
 
 .video-fallback {
+	/* Liên kết dự phòng nếu video nhúng không khả dụng. */
 	display: inline-block;
 	margin-top: 14px;
 	color: var(--forest);
@@ -661,6 +751,7 @@ body.navbar-hidden .site-header {
 }
 
 .donate-section {
+	/* Xếp lời kêu gọi quyên góp và nút hành động trên cùng một hàng. */
 	width: min(calc(100% - 48px), 1120px);
 	display: flex;
 	align-items: center;
@@ -671,6 +762,7 @@ body.navbar-hidden .site-header {
 }
 
 .donate-section h2 {
+	/* Tiêu đề kêu gọi quyên góp có chiều rộng tối đa. */
 	max-width: 590px;
 	margin: 0;
 	font-size: 48px;
@@ -678,6 +770,7 @@ body.navbar-hidden .site-header {
 }
 
 .donate-button {
+	/* Nút quyên góp có kích thước ổn định và biểu tượng cách nhãn. */
 	min-height: 52px;
 	flex: 0 0 auto;
 	display: inline-flex;
@@ -692,10 +785,12 @@ body.navbar-hidden .site-header {
 }
 
 .donate-button:hover {
+	/* Làm đậm màu nút quyên góp khi rê chuột. */
 	background: #963d23;
 }
 
 .site-footer {
+	/* Chân trang căn nội dung trong cùng lề với phần chính. */
 	min-height: 68px;
 	display: flex;
 	align-items: center;
@@ -708,12 +803,14 @@ body.navbar-hidden .site-header {
 }
 
 .site-footer a {
+	/* Màu nhận diện và bỏ gạch chân cho liên kết chân trang. */
 	color: var(--forest);
 	text-decoration: none;
 }
 
 @media (max-width: 900px) {
 	/* Giảm cỡ chữ và khoảng cách của nội dung khi chiều ngang bị giới hạn. */
+	/* Các thiết lập dưới đây điều chỉnh tiêu đề, thanh điều hướng và cột nội dung cho tablet. */
 	.hero h1 {
 		font-size: 70px;
 	}
@@ -731,60 +828,73 @@ body.navbar-hidden .site-header {
 	}
 
 	.site-header {
+		/* Thu gọn khoảng cách và phần đệm của thanh điều hướng. */
 		gap: 14px;
 		padding-inline: 12px;
 	}
 
 	.main-nav,
 	.account-tools {
+		/* Nén khoảng cách giữa các mục ở thanh đầu trang. */
 		gap: 12px;
 	}
 
 	.account-greeting {
+		/* Ẩn lời chào để dành chỗ cho điều hướng. */
 		display: none;
 	}
 
 	.impact-layout {
+		/* Thu hẹp khoảng cách giữa hai cột số liệu. */
 		gap: 30px;
 	}
 
 	.why-water-intro {
+		/* Giảm khoảng cách giữa hai cột giới thiệu. */
 		gap: 32px;
 	}
 
 	.why-water-intro h2 {
+		/* Thu nhỏ tiêu đề phần giới thiệu. */
 		font-size: 46px;
 	}
 
 	.about-section {
+		/* Thu hẹp phần giới thiệu thành hai cột ở tablet. */
 		grid-template-columns: .45fr 1.55fr;
 	}
 
 	.fact-section {
+		/* Giảm khoảng cách và đệm ngang của khối dữ kiện. */
 		gap: 24px;
 		padding-inline: 44px;
 	}
 
 	.fact-copy h2 {
+		/* Thu gọn tiêu đề dữ kiện. */
 		font-size: 34px;
 	}
 
 	.about-statement {
+		/* Đặt câu thông điệp dưới nội dung chính ở cột thứ hai. */
 		grid-column: 2;
 	}
 
 	.video-section h2 {
+		/* Thu nhỏ tiêu đề video ở tablet. */
 		font-size: 34px;
 	}
 }
 
 @media (max-width: 640px) {
 	/* Xếp các khu vực nội dung theo một cột trên điện thoại. */
+	/* Quy tắc bên trong co gọn menu, hero, dữ liệu và các phần giới thiệu. */
 	html {
 		scroll-padding-top: 126px;
 	}
 
 	.site-header {
+		/* Cho thanh điều hướng nhiều hàng vừa với màn hình nhỏ. */
 		width: calc(100% - 20px);
 		top: 8px;
 		min-height: 68px;
@@ -796,47 +906,57 @@ body.navbar-hidden .site-header {
 	}
 
 	.brand {
+		/* Thu gọn khoảng cách trong cụm thương hiệu. */
 		gap: 7px;
 	}
 
 	.brand-mark {
+		/* Giảm kích thước huy hiệu thương hiệu. */
 		width: 32px;
 	}
 
 	.brand-copy strong {
+		/* Thu nhỏ tên thương hiệu. */
 		font-size: 12px;
 	}
 
 	.brand-copy small {
+		/* Giới hạn chiều rộng khẩu hiệu trên điện thoại. */
 		max-width: 150px;
 		font-size: 9px;
 	}
 
 	.account-tools {
+		/* Đẩy công cụ tài khoản về phía phải thanh đầu trang. */
 		margin-left: auto;
 	}
 
 	.logout-button {
+		/* Thu gọn nút đăng xuất. */
 		min-height: 32px;
 		padding-inline: 8px;
 		font-size: 10px;
 	}
 
 	.main-nav {
+		/* Đưa liên kết điều hướng xuống hàng riêng và căn giữa. */
 		width: 100%;
 		justify-content: center;
 		gap: clamp(18px, 7vw, 36px);
 	}
 
 	.main-nav a {
+		/* Giảm cỡ chữ liên kết điều hướng. */
 		font-size: 11px;
 	}
 
 	.main-nav .donate-link {
+		/* Thu nhỏ vùng đệm nút quyên góp. */
 		padding: 7px 9px;
 	}
 
 	.hero {
+		/* Điều chỉnh chiều cao, ảnh nền và khoảng đệm cho điện thoại. */
 		width: calc(100% - 20px);
 		min-height: 650px;
 		padding: 150px 26px 70px;
@@ -844,25 +964,30 @@ body.navbar-hidden .site-header {
 	}
 
 	.hero::before {
+		/* Tăng lớp phủ để chữ luôn dễ đọc trên ảnh nền. */
 		background: linear-gradient(90deg, rgb(63 31 21 / 52%), rgb(89 43 25 / 28%)), linear-gradient(0deg, rgb(55 29 20 / 22%), transparent 42%);
 	}
 
 	.hero h1 {
+		/* Thu nhỏ tiêu đề hero trên điện thoại. */
 		max-width: 420px;
 		font-size: 48px;
 	}
 
 	.hero-copy {
+		/* Giảm cỡ chữ mô tả hero. */
 		font-size: 14px;
 	}
 
 	.hero-caption {
+		/* Đặt chú thích ở góc trái và giới hạn độ rộng. */
 		left: 26px;
 		max-width: 240px;
 		line-height: 1.5;
 	}
 
 	.why-water-intro {
+		/* Xếp nội dung giới thiệu thành một cột. */
 		width: calc(100% - 40px);
 		grid-template-columns: 1fr;
 		gap: 18px;
@@ -870,20 +995,24 @@ body.navbar-hidden .site-header {
 	}
 
 	.why-water-intro h2 {
+		/* Thu nhỏ tiêu đề giới thiệu trên điện thoại. */
 		font-size: 40px;
 	}
 
 	.why-water-intro > p:last-child {
+		/* Giảm cỡ chữ phần mô tả giới thiệu. */
 		font-size: 14px;
 	}
 
 	.reason-showcase {
+		/* Điều chỉnh kích thước khung ảnh lý do hỗ trợ trên điện thoại. */
 		width: calc(100% - 20px);
 		height: 650px;
 		margin-bottom: 70px;
 	}
 
 	.reason-tabs {
+		/* Đưa nút lựa chọn sát mép khung và giảm khoảng cách. */
 		top: 16px;
 		left: 12px;
 		right: 12px;
@@ -891,12 +1020,14 @@ body.navbar-hidden .site-header {
 	}
 
 	.reason-tab {
+		/* Thu gọn kích thước nút lựa chọn. */
 		min-height: 38px;
 		padding-inline: 12px;
 		font-size: 9px;
 	}
 
 	.reason-panel {
+		/* Mở rộng thẻ nội dung gần hết chiều ngang khung. */
 		right: 14px;
 		bottom: 14px;
 		width: calc(100% - 28px);
@@ -904,51 +1035,62 @@ body.navbar-hidden .site-header {
 	}
 
 	.reason-panel h3 {
+		/* Thu nhỏ tiêu đề thẻ nội dung. */
 		font-size: 24px;
 	}
 
 	.reason-panel > p:last-child {
+		/* Giảm cỡ chữ mô tả lý do. */
 		font-size: 13px;
 	}
 
 	.impact-section {
+		/* Thu hẹp lề và khoảng đệm phần tác động. */
 		width: calc(100% - 40px);
 		padding: 74px 0;
 	}
 
 	.section-heading {
+		/* Giảm khoảng cách dưới tiêu đề phần. */
 		margin-bottom: 27px;
 	}
 
 	.section-heading h2 {
+		/* Thu nhỏ tiêu đề phần tác động. */
 		font-size: 38px;
 	}
 
 	.impact-layout {
+		/* Xếp thẻ tổng quan và dữ liệu quốc gia thành một cột. */
 		grid-template-columns: 1fr;
 		gap: 22px;
 	}
 
 	.impact-summary {
+		/* Giảm chiều cao và khoảng đệm của thẻ tổng quan. */
 		min-height: 230px;
 		padding: 26px;
 	}
 
 	.summary-number {
+		/* Điều chỉnh cỡ số liệu tổng cho thẻ nhỏ hơn. */
 		font-size: 62px;
 	}
 
 	.country-data {
+		/* Thu gọn khoảng đệm phía trên danh sách quốc gia. */
 		padding-top: 8px;
 	}
 
 	.about-section {
+		/* Xếp số thứ tự, nội dung và câu thông điệp thành một cột. */
 		grid-template-columns: 1fr;
 		gap: 21px;
 		padding: 54px 24px;
 	}
 
 	.fact-section {
+		/* Xếp nội dung dữ kiện và năm trang trí theo chiều dọc. */
 		width: calc(100% - 20px);
 		min-height: auto;
 		grid-template-columns: 1fr;
@@ -958,31 +1100,38 @@ body.navbar-hidden .site-header {
 	}
 
 	.fact-copy h2 {
+		/* Thu nhỏ tiêu đề khối dữ kiện. */
 		font-size: 29px;
 	}
 
 	.fact-year {
+		/* Giữ năm trang trí gọn trên màn hình nhỏ. */
 		font-size: 52px;
 	}
 
 	.about-content h2 {
+		/* Thu nhỏ tiêu đề phần giới thiệu. */
 		font-size: 34px;
 	}
 
 	.about-statement {
+		/* Đưa câu thông điệp trở lại luồng cột đơn. */
 		grid-column: auto;
 	}
 
 	.video-section {
+		/* Thu gọn lề và khoảng cách khu vực video. */
 		width: calc(100% - 40px);
 		padding: 54px 0 42px;
 	}
 
 	.video-section h2 {
+		/* Thu nhỏ tiêu đề video trên điện thoại. */
 		font-size: 30px;
 	}
 
 	.donate-section {
+		/* Xếp lời kêu gọi và nút quyên góp thành cột. */
 		width: calc(100% - 40px);
 		align-items: flex-start;
 		flex-direction: column;
@@ -991,10 +1140,12 @@ body.navbar-hidden .site-header {
 	}
 
 	.donate-section h2 {
+		/* Thu nhỏ tiêu đề quyên góp. */
 		font-size: 36px;
 	}
 
 	.site-footer {
+		/* Xếp nội dung chân trang dọc khi màn hình hẹp. */
 		align-items: flex-start;
 		flex-direction: column;
 		justify-content: center;

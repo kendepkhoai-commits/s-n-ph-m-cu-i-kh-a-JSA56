@@ -1,4 +1,5 @@
 :root {
+	/* Màu sắc dùng chung cho trang đăng nhập và đăng ký. */
 	color-scheme: light;
 	--ink: #38271e;
 	--muted: #796457;
@@ -9,10 +10,12 @@
 }
 
 * {
+	/* Bao gồm padding và viền trong kích thước phần tử. */
 	box-sizing: border-box;
 }
 
 body {
+	/* Căn nội dung biểu mẫu giữa màn hình trên nền ảnh phủ kín. */
 	min-height: 100vh;
 	margin: 0;
 	display: grid;
@@ -27,6 +30,7 @@ body {
 /* Lớp phủ làm tối ảnh nền; các biểu mẫu vẫn nằm phía trên lớp phủ. */
 body::before {
 	/* Lớp phủ nằm phía sau nội dung; position: relative của .layout giữ form ở trên. */
+	/* Phủ toàn màn hình bằng lớp màu tối để tăng độ tương phản. */
 	position: fixed;
 	inset: 0;
 	content: "";
@@ -35,6 +39,7 @@ body::before {
 
 .layout {
 	/* Cột giới thiệu co giãn còn cột biểu mẫu giữ độ rộng dễ đọc trên desktop. */
+	/* Khung hai cột chung cho phần giới thiệu và biểu mẫu xác thực. */
 	position: relative;
 	width: min(100%, 980px);
 	display: grid;
@@ -46,6 +51,7 @@ body::before {
 }
 
 .story {
+	/* Cột nội dung giới thiệu nằm trên nền tối trong khung xác thực. */
 	display: flex;
 	min-height: 590px;
 	flex-direction: column;
@@ -56,6 +62,7 @@ body::before {
 }
 
 .eyebrow {
+	/* Nhãn nhỏ phía trên tiêu đề, dùng màu sáng và chữ in hoa. */
 	margin: 0;
 	color: #f1bd88;
 	font: 700 12px/1.4 Arial, sans-serif;
@@ -64,6 +71,7 @@ body::before {
 }
 
 .brand-lockup {
+	/* Xếp tên thương hiệu và khẩu hiệu theo chiều dọc. */
 	display: inline-flex;
 	flex-direction: column;
 	align-items: flex-start;
@@ -74,23 +82,28 @@ body::before {
 }
 
 .brand-name {
+	/* Kiểu chữ đậm cho tên thương hiệu. */
 	font: 800 20px/1.1 "Trebuchet MS", "Segoe UI", Arial, sans-serif;
 }
 
 .brand-slogan {
+	/* Khẩu hiệu nhỏ dùng màu chữ phụ. */
 	color: var(--muted);
 	font: 12px/1.45 "Segoe UI", Arial, sans-serif;
 }
 
 .story .brand-lockup {
+	/* Đổi màu thương hiệu để tương phản với nền tối của phần giới thiệu. */
 	color: var(--paper);
 }
 
 .story .brand-slogan {
+	/* Tăng tương phản khẩu hiệu trên nền tối. */
 	color: #f3e6d7;
 }
 
 h1 {
+	/* Tiêu đề chính có cỡ chữ co giãn theo độ rộng màn hình. */
 	max-width: 470px;
 	margin: 20px 0 18px;
 	font-size: clamp(40px, 5vw, 64px);
@@ -99,6 +112,7 @@ h1 {
 }
 
 .story-copy {
+	/* Đoạn mô tả trong cột giới thiệu. */
 	max-width: 390px;
 	margin: 0;
 	color: #f3e6d7;
@@ -106,6 +120,7 @@ h1 {
 }
 
 .story-note {
+	/* Ghi chú trích dẫn có vạch nhấn dọc. */
 	max-width: 350px;
 	margin: 42px 0 0;
 	padding-left: 16px;
@@ -115,11 +130,13 @@ h1 {
 }
 
 .form-panel {
+	/* Bề mặt sáng chứa biểu mẫu đăng ký. */
 	padding: 38px 34px 32px;
 	background: var(--paper);
 }
 
 .form-panel h2 {
+	/* Tiêu đề phụ trong bảng biểu mẫu. */
 	margin: 0 0 7px;
 	font-size: 30px;
 	font-weight: 500;
@@ -127,12 +144,14 @@ h1 {
 
 .form-intro,
 .intro {
+	/* Đoạn hướng dẫn ngắn phía trên biểu mẫu. */
 	margin: 0 0 24px;
 	color: var(--muted);
 	font: 14px/1.5 Arial, sans-serif;
 }
 
 .login-panel {
+	/* Khung độc lập cho biểu mẫu đăng nhập. */
 	position: relative;
 	width: min(100%, 420px);
 	padding: 38px;
@@ -143,20 +162,24 @@ h1 {
 }
 
 .login-panel h1 {
+	/* Tiêu đề đăng nhập nhỏ hơn tiêu đề giới thiệu. */
 	margin: 0 0 7px;
 	font-size: 34px;
 }
 
 form {
+	/* Xếp các trường biểu mẫu thành cột có khoảng cách đều. */
 	display: grid;
 	gap: 14px;
 }
 
 .login-panel form {
+	/* Điều chỉnh khoảng cách riêng cho biểu mẫu đăng nhập. */
 	gap: 15px;
 }
 
 label {
+	/* Đặt nhãn trường phía trên ô nhập liệu. */
 	display: grid;
 	gap: 7px;
 	color: #4e392d;
@@ -164,6 +187,7 @@ label {
 }
 
 input {
+	/* Kiểu mặc định cho ô nhập liệu. */
 	width: 100%;
 	min-height: 46px;
 	padding: 11px 13px;
@@ -177,11 +201,13 @@ input {
 }
 
 input:focus {
+	/* Làm nổi bật ô nhập liệu đang được focus. */
 	border-color: var(--rust);
 	box-shadow: 0 0 0 3px rgb(167 71 45 / 13%);
 }
 
 button {
+	/* Kiểu nút chính dùng trong biểu mẫu xác thực. */
 	min-height: 48px;
 	margin-top: 5px;
 	border: 0;
@@ -194,32 +220,39 @@ button {
 }
 
 button:hover {
+	/* Đổi màu nút khi rê chuột. */
 	background: var(--rust-dark);
 }
 
 button:active {
+	/* Tạo cảm giác nút được nhấn xuống. */
 	transform: translateY(1px);
 }
 
 .login-panel button {
+	/* Điều chỉnh khoảng cách nút trong bảng đăng nhập. */
 	margin-top: 4px;
 }
 
 .message {
+	/* Vùng thông báo giữ chỗ để bố cục không nhảy khi hiện kết quả. */
 	min-height: 20px;
 	margin: 0;
 	font: 13px/1.5 Arial, sans-serif;
 }
 
 .message.error {
+	/* Màu thông báo khi có lỗi. */
 	color: #a02c20;
 }
 
 .message.success {
+	/* Màu thông báo khi thao tác thành công. */
 	color: #42613c;
 }
 
 .switch {
+	/* Dòng chuyển đổi giữa đăng nhập và đăng ký. */
 	margin: 14px 0 0;
 	color: var(--muted);
 	text-align: center;
@@ -227,15 +260,18 @@ button:active {
 }
 
 .login-panel .switch {
+	/* Tăng khoảng cách dòng chuyển đổi trong khung đăng nhập. */
 	margin-top: 18px;
 }
 
 .switch a {
+	/* Nhấn mạnh liên kết chuyển trang. */
 	color: var(--rust-dark);
 	font-weight: 700;
 }
 
 @media (max-width: 760px) {
+	/* Xếp hai cột thành một cột và giảm khoảng đệm trên màn hình nhỏ. */
 	body {
 		padding: 16px;
 		background-attachment: scroll;
@@ -248,30 +284,36 @@ button:active {
 	}
 
 	.story {
+		/* Cho phần giới thiệu co theo nội dung thay vì giữ chiều cao desktop. */
 		min-height: auto;
 		padding: 28px 28px 24px;
 	}
 
 	h1 {
+		/* Thu nhỏ tiêu đề trên thiết bị di động. */
 		max-width: 360px;
 		margin: 13px 0 12px;
 		font-size: 42px;
 	}
 
 	.story-copy {
+		/* Giảm cỡ chữ mô tả cho màn hình hẹp. */
 		font-size: 14px;
 	}
 
 	.story-note {
+		/* Ẩn ghi chú phụ để dành chỗ cho nội dung chính. */
 		display: none;
 	}
 
 	.form-panel {
+		/* Giảm đệm bên trong bảng biểu mẫu. */
 		padding: 28px;
 	}
 }
 
 @media (max-width: 480px) {
+	/* Thu gọn thêm phần đệm của khung đăng nhập ở điện thoại nhỏ. */
 	.login-panel {
 		padding: 30px 24px;
 	}
