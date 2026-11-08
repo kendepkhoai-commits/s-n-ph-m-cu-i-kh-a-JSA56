@@ -94,7 +94,14 @@ const SEED_DONORS = [
 // ================= KHỞI TẠO TRANG =================
 document.addEventListener("DOMContentLoaded", () => {
 	// Chạy sau khi HTML đã sẵn sàng để các ID bên trên đều trỏ tới phần tử thật.
-	initDonationStorage(); // Đọc hoặc tạo tổng tiền và danh sách mẫu.
+	try {
+		initDonationStorage(); // Đọc hoặc tạo tổng tiền và danh sách mẫu.
+	} catch (error) {
+		console.error("Không thể khởi tạo dữ liệu quyên góp mô phỏng.", error);
+		submitDonationBtn.disabled = true;
+		showToast("Không thể khởi tạo dữ liệu demo trong bộ nhớ trình duyệt.");
+		return;
+	}
 	initCurrency(currentCurrency); // Dựng các mức tiền theo đơn vị mặc định.
 	setupEventListeners(); // Gắn phím tắt đóng biên lai.
 });
@@ -288,6 +295,8 @@ function validateForm() {
 	const amountStep = currentCurrency === "VND" ? 10000 : 1;
 	const isAmountValid = Number.isFinite(selectedAmountValue)
 		&& selectedAmountValue >= amountMin
+		// Số tiền tùy chọn phải cách mức tối thiểu một số bước nguyên (VD: 10.000, 20.000...).
+		// Mức chọn sẵn không cần kiểm tra bước vì các giá trị đó đã được định nghĩa trước.
 		&& (!customAmountSelected || Number.isInteger((selectedAmountValue - amountMin) / amountStep));
 
 	if (!isAmountValid) {
@@ -302,10 +311,6 @@ function validateForm() {
 }
 
 donationForm.addEventListener("submit", (e) => { // Xử lý việc gửi biểu mẫu quyên góp.
-	/*
-	 * Chặn tải lại trang, gọi kiểm tra tùy chỉnh trước. Nếu có lỗi thì dừng tại
-	 * đây; nếu hợp lệ thì khóa nút trong lúc mô phỏng xử lý rồi gọi hàm ghi nhận.
-	 */
 	e.preventDefault(); // Ngăn trình duyệt tải lại trang khi gửi form.
 
 	if (!validateForm()) {
@@ -313,19 +318,16 @@ donationForm.addEventListener("submit", (e) => { // Xử lý việc gửi biểu
 		return; // Không ghi nhận quyên góp khi dữ liệu chưa hợp lệ.
 	}
 
-	// Khóa nút gửi trong lúc mô phỏng xử lý giao dịch.
-	submitDonationBtn.disabled = true; // Chặn bấm gửi nhiều lần trong lúc chờ.
-	const originalBtnText = submitBtnText.textContent; // Giữ lại nội dung nút để khôi phục sau.
-	submitBtnText.textContent = "Đang ghi nhận mô phỏng..."; // Không ám chỉ đang kết nối cổng thanh toán thật.
-
-	// Bản demo chờ ngắn rồi mới ghi nhận giao dịch.
-	setTimeout(() => {
-		submitDonationBtn.disabled = false; // Cho phép gửi lại sau khi mô phỏng kết thúc.
-		submitBtnText.textContent = originalBtnText; // Khôi phục nội dung nút ban đầu.
-
-		// Ghi nhận khoản ủng hộ và hiện biên lai.
+	// Giữ nút khóa đến khi biên lai đóng để tránh ghi nhận lặp do bấm liên tiếp.
+	if (submitDonationBtn.disabled) return;
+	submitDonationBtn.disabled = true; // Chặn ghi nhận lặp khi biên lai đang mở.
+	try {
 		handleSuccessfulDonation(); // Ghi nhận khoản demo và hiển thị biên lai.
-	}, 1200); // Chờ 1,2 giây để mô phỏng thao tác xử lý.
+	} catch (error) {
+		submitDonationBtn.disabled = false;
+		console.error("Không thể ghi nhận lượt ủng hộ mô phỏng.", error);
+		showToast("Không thể lưu lượt ủng hộ trên trình duyệt này.");
+	}
 });
 
 function handleSuccessfulDonation() {
@@ -392,7 +394,14 @@ function renderCampaignProgress() {
 	 * cách hiển thị nếu đang chọn USD. Độ rộng thanh được giới hạn ở 100%;
 	 * phần trăm này dựa trên tổng gốc VNĐ.
 	 */
-	const totalVnd = Number(localStorage.getItem("wfa_total_raised_vnd")) || 842650000; // Đọc tổng tiền quyên góp lưu theo VNĐ hoặc dùng số ban đầu.
+	let totalVnd;
+	try {
+		totalVnd = Number(localStorage.getItem("wfa_total_raised_vnd")) || 842650000;
+	} catch (error) {
+		console.error("Không thể đọc tổng tiền quyên góp đã lưu.", error);
+		showToast("Không thể đọc dữ liệu tiến độ đã lưu.");
+		return;
+	}
 	const targetVnd = campaignTargetVND; // Mục tiêu gốc của chiến dịch luôn được lưu bằng VNĐ.
 	// Giới hạn thanh tiến độ ở 100%, kể cả khi tổng quyên góp vượt mục tiêu.
 	const percent = Math.min(100, ((totalVnd / targetVnd) * 100)).toFixed(1); // Tính phần trăm và chặn thanh ở tối đa 100%.
@@ -494,6 +503,7 @@ function renderDonorsList() {
 // ================= SỰ KIỆN BIÊN LAI VÀ THÔNG BÁO =================
 function closeModal() {
 	receiptModalOverlay.classList.remove("active"); // Ẩn hộp thoại biên lai.
+	submitDonationBtn.disabled = false; // Cho phép gửi lượt demo tiếp theo.
 }
 
 modalCloseBtn.addEventListener("click", closeModal); // Nút X đóng biên lai.

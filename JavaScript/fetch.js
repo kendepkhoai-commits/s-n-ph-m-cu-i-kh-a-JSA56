@@ -1,5 +1,5 @@
-// Mã ISO-3 giúp chỉ giữ quốc gia châu Phi và loại các dòng tổng hợp khu vực của API.
-const africaCodes = new Set([ // Danh sách mã ISO-3 để chỉ lấy các quốc gia châu Phi.
+// ISO-3 là mã quốc gia 3 chữ cái (ví dụ KEN = Kenya); Set này dùng để lọc châu Phi.
+const africaCodes = new Set([
     "DZA", "AGO", "BEN", "BWA", "BFA", "BDI", "CPV",
     "CMR", "CAF", "TCD", "COM", "COG", "COD", "CIV",
     "DJI", "EGY", "GNQ", "ERI", "SWZ", "ETH", "GAB",
@@ -10,90 +10,161 @@ const africaCodes = new Set([ // Danh sách mã ISO-3 để chỉ lấy các qu�
     "TGO", "TUN", "UGA", "ZMB", "ZWE"
 ]);
 
-// Mỗi đường dẫn chọn một chỉ số; date giới hạn năm, còn mrnev lấy năm mới nhất có dữ liệu.
-const populationApi = // Đường dẫn API lấy dân số của năm 2024.
+// Mỗi URL chọn một chỉ số World Bank: dân số, tỷ lệ tiếp cận nước và tử vong.
+// Dân số/nước cố định năm 2024 để so sánh cùng mốc; tử vong lấy năm mới nhất có dữ liệu.
+// format=json yêu cầu JSON; per_page là số dòng tối đa mỗi trang; mrnev=1 chọn quan sát gần nhất.
+const populationApi =
     "https://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?format=json&date=2024:2024&per_page=300";
-const waterApi = // Đường dẫn API lấy tỷ lệ tiếp cận nước uống cơ bản năm 2024.
+const waterApi =
     "https://api.worldbank.org/v2/country/all/indicator/SH.H2O.BASW.ZS?format=json&date=2024:2024&per_page=300";
-const mortalityApi = // Đường dẫn API lấy số liệu tử vong mới nhất theo quốc gia.
+const mortalityApi =
     "https://api.worldbank.org/v2/country/all/indicator/SH.STA.WASH.P5?format=json&mrnev=1&per_page=300";
 
+// Gọi một trang API, giới hạn thời gian chờ và kiểm tra phản hồi trước khi dùng dữ liệu.
+async function fetchWorldBankPage(url) {
+    // AbortController cho phép hủy yêu cầu nếu máy chủ phản hồi quá lâu.
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+    try {
+        // Truyền signal để fetch nhận biết yêu cầu có thể bị hủy bởi timeout.
+        const response = await fetch(url, { signal: controller.signal });
+        // fetch không tự báo lỗi với HTTP 404/500, nên phải kiểm tra response.ok.
+        if (!response.ok) {
+            throw new Error(`World Bank API trả về lỗi HTTP ${response.status}.`);
+        }
+
+        let payload;
+        try {
+            // Chuyển phần JSON trong phản hồi thành dữ liệu JavaScript.
+            payload = await response.json();
+        } catch {
+            throw new Error("World Bank API trả về JSON không hợp lệ.");
+        }
+
+        // World Bank thường trả [metadata, danh_sách_quan_sát].
+        // Kiểm tra cấu trúc trước khi đọc để tránh lỗi khi API trả dữ liệu khác dự kiến.
+        if (!Array.isArray(payload) || !payload[0] || typeof payload[0] !== "object") {
+            throw new Error("World Bank API trả về dữ liệu không đúng định dạng.");
+        }
+
+        const metadata = payload[0];
+        // API có thể trả lỗi nghiệp vụ trong metadata dù HTTP vẫn thành công.
+        const apiMessages = Array.isArray(metadata.message)
+            ? metadata.message.map(message => message.value || message.id).filter(Boolean).join("; ")
+            : metadata.message;
+        if (apiMessages) {
+            throw new Error(`World Bank API: ${apiMessages}`);
+        }
+
+        const observations = payload[1];
+        // Không có dữ liệu hợp lệ có thể là null; nếu có thì phải là một mảng.
+        if (observations !== null && observations !== undefined && !Array.isArray(observations)) {
+            throw new Error("World Bank API trả về danh sách quan sát không hợp lệ.");
+        }
+
+        // Trả cả số trang và dữ liệu để fetchIndicator biết có cần tải tiếp không.
+        const pageCount = Number(metadata.pages);
+        return {
+            pageCount: Number.isInteger(pageCount) && pageCount > 0 ? pageCount : 1,
+            observations: observations || []
+        };
+    } catch (error) {
+        // Đổi lỗi kỹ thuật phổ biến thành thông báo dễ hiểu; lỗi khác được giữ nguyên.
+        if (error.name === "AbortError") {
+            throw new Error("Kết nối World Bank API quá thời gian chờ. Vui lòng thử lại.");
+        }
+        if (error instanceof TypeError) {
+            throw new Error("Không thể kết nối tới World Bank API. Vui lòng kiểm tra mạng.");
+        }
+        throw error;
+    } finally {
+        // Dọn bộ hẹn giờ dù thành công hay thất bại để không giữ timer thừa.
+        clearTimeout(timeoutId);
+    }
+}
+
 /**
- * Lấy một chỉ số từ API World Bank và chuẩn hóa kết quả thành danh sách quan sát.
- * API thường trả về mảng gồm hai phần: metadata phân trang ở payload[0] và
- * dữ liệu quốc gia ở payload[1]. Hàm báo lỗi nếu yêu cầu HTTP thất bại hoặc
- * cấu trúc JSON không giống định dạng API; danh sách rỗng được trả về khi
- * API hợp lệ nhưng không có quan sát.
+ * Lấy đủ các trang của một chỉ số. `per_page=300` thường đủ cho API này,
+ * nhưng vẫn đọc metadata để không bỏ sót kết quả nếu dữ liệu vượt giới hạn.
  */
-async function fetchIndicator(url) { // Tải một chỉ số từ API và trả về danh sách quốc gia.
-    const response = await fetch(url); // Gửi yêu cầu HTTP đến địa chỉ API nhận vào.
-    if (!response.ok) { // Kiểm tra máy chủ có trả về trạng thái thành công không.
-        throw new Error("Không thể kết nối tới API của Ngân hàng Thế giới."); // Dừng và báo lỗi nếu gọi API thất bại.
+async function fetchIndicator(url) {
+    // Tạo URL mới để thêm tham số phân trang mà không sửa chuỗi URL gốc.
+    const firstPageUrl = new URL(url);
+    firstPageUrl.searchParams.set("per_page", "300");
+    firstPageUrl.searchParams.set("page", "1");
+
+    // Luôn lấy trang đầu trước vì metadata ở đây cho biết tổng số trang.
+    const firstPage = await fetchWorldBankPage(firstPageUrl);
+    if (firstPage.pageCount === 1) {
+        return firstPage.observations;
     }
 
-    const payload = await response.json(); // Đọc phần thân phản hồi và chuyển JSON thành dữ liệu JavaScript.
-    if (!Array.isArray(payload) || !payload[0]) { // Kiểm tra phản hồi có đúng cấu trúc mảng của World Bank không.
-        throw new Error("API của Ngân hàng Thế giới trả về dữ liệu không hợp lệ."); // Báo lỗi nếu JSON sai định dạng.
-    }
+    // Trang đầu cho biết tổng số trang; gọi các trang còn lại song song để tiết kiệm thời gian.
+    const remainingPages = await Promise.all(
+        Array.from({ length: firstPage.pageCount - 1 }, (_, index) => {
+            const pageUrl = new URL(firstPageUrl);
+            // Trang đầu đã lấy rồi; index bắt đầu từ 0 nên cộng 2 để ra trang kế tiếp.
+            pageUrl.searchParams.set("page", String(index + 2));
+            return fetchWorldBankPage(pageUrl);
+        })
+    );
 
-    return payload[1] || []; // Phần tử thứ hai là dữ liệu; nếu rỗng thì trả về mảng rỗng.
+    // Ghép quan sát trang đầu với các trang còn lại thành một danh sách duy nhất.
+    return [
+        ...firstPage.observations,
+        ...remainingPages.flatMap(page => page.observations)
+    ];
 }
 
-async function getAfricanWaterStatistics() { // Lấy, ghép và tính dữ liệu cho trang information.
-    /*
-     * 1. Gọi ba endpoint: dân số và tỷ lệ nước sạch của năm 2024, cùng tỷ lệ
-     *    tử vong gần nhất mà World Bank có cho từng quốc gia.
-     * 2. Promise.all chờ tất cả yêu cầu cùng hoàn tất; nếu một yêu cầu lỗi,
-     *    toàn bộ thao tác lỗi để trang không hiển thị thống kê thiếu một chỉ số.
-     */
-    const [populationData, waterData, mortalityData] = await Promise.all([ // Chờ cả ba API trả dữ liệu.
-        fetchIndicator(populationApi), // Lấy dân số năm 2024.
-        fetchIndicator(waterApi), // Lấy tỷ lệ tiếp cận nước năm 2024.
-        fetchIndicator(mortalityApi) // Lấy tỷ lệ tử vong mới nhất.
-    ]); // Promise.all giúp ba yêu cầu chạy cùng lúc thay vì chờ lần lượt.
+async function getAfricanWaterStatistics() {
+    // Ba yêu cầu độc lập nên gọi song song; chờ đủ dữ liệu rồi mới ghép và tính thống kê.
+    const [populationData, waterData, mortalityData] = await Promise.all([
+        fetchIndicator(populationApi),
+        fetchIndicator(waterApi),
+        fetchIndicator(mortalityApi)
+    ]);
 
-    /*
-     * Dữ liệu ba endpoint được trả về thành các mảng riêng. Chuyển hai mảng
-     * phụ thành Map theo mã ISO-3 để tìm tỷ lệ nước/tử vong tương ứng với
-     * mỗi dòng dân số nhanh và nhất quán, thay vì ghép theo tên quốc gia.
-     */
-    const waterByCountry = new Map(waterData.map(item => [item.countryiso3code, item])); // Tạo tra cứu tỷ lệ nước bằng mã quốc gia.
-    const mortalityByCountry = new Map(mortalityData.map(item => [item.countryiso3code, item])); // Tạo tra cứu tử vong bằng mã quốc gia.
+    // Dùng mã ISO-3 làm khóa để ghép đúng dữ liệu giữa các API, không phụ thuộc tên nước.
+    // Ví dụ: waterByCountry.get("KEN") trả về dòng dữ liệu nước của Kenya.
+    const waterByCountry = new Map(waterData.map(item => [item.countryiso3code, item]));
+    const mortalityByCountry = new Map(mortalityData.map(item => [item.countryiso3code, item]));
 
-    /*
-     * Dân số làm danh sách gốc: chỉ giữ quốc gia châu Phi có số dân dạng số,
-     * rồi ghép dữ liệu nước và tử vong theo mã quốc gia. Giá trị null có nghĩa
-     * là API chưa có dữ liệu, không phải tỷ lệ/số ca bằng 0.
-     */
-    const countries = populationData // Dùng danh sách dân số làm danh sách quốc gia chính.
-        .filter(item => africaCodes.has(item.countryiso3code) && Number.isFinite(item.value)) // Chỉ giữ nước châu Phi có dân số hợp lệ.
-        .map(population => { // Xử lý từng nước để ghép đủ ba loại dữ liệu.
-            const water = waterByCountry.get(population.countryiso3code); // Tìm tỷ lệ nước cùng mã ISO-3.
-            const mortality = mortalityByCountry.get(population.countryiso3code); // Tìm số liệu tử vong cùng mã ISO-3.
-            // null giữ rõ trạng thái thiếu dữ liệu để không biến dữ liệu thiếu thành 0%.
-            const waterAccess = Number.isFinite(water?.value) ? water.value : null; // Lưu null nếu API chưa có tỷ lệ nước.
+    return populationData
+        .filter(item =>
+            // Bỏ vùng/tổng hợp, dân số thiếu (NaN) và giá trị âm không hợp lệ.
+            africaCodes.has(item.countryiso3code)
+            && Number.isFinite(item.value)
+            && item.value >= 0
+        )
+        .map(population => {
+            // Tìm dữ liệu tương ứng; nếu mã không có ở API phụ, kết quả sẽ là undefined.
+            const water = waterByCountry.get(population.countryiso3code);
+            const mortality = mortalityByCountry.get(population.countryiso3code);
+            // API có thể thiếu value (null), nên chỉ chấp nhận số hợp lệ và trong phạm vi hợp lý.
+            const hasValidWaterRate =
+                Number.isFinite(water?.value) && water.value >= 0 && water.value <= 100;
+            const waterAccess = hasValidWaterRate ? water.value : null;
+            const hasValidMortalityRate =
+                Number.isFinite(mortality?.value) && mortality.value >= 0;
 
-            return { // Chuẩn hóa dữ liệu của một nước thành object dễ dùng ở trang HTML.
-                code: population.countryiso3code, // Mã ISO-3 dùng để nhận diện nước.
-                name: population.country.value, // Tên nước để hiển thị.
-                population: population.value, // Dân số lấy từ API.
-                populationYear: population.date, // Năm của số liệu dân số.
-                waterAccess, // Phần trăm dân số có nước uống cơ bản.
-                waterYear: water?.date || null, // Năm của số liệu nước, hoặc null nếu thiếu.
-                /*
-                 * Ước tính người chưa tiếp cận = dân số × (100 - % tiếp cận) / 100.
-                 * Không tính nếu thiếu tỷ lệ nước; dùng năm dân số 2024 và tỷ lệ
-                 * nước 2024 do endpoint đã giới hạn năm ở tham số date.
-                 */
-                estimatedWithoutBasicWater: waterAccess === null // Không ước tính nếu thiếu tỷ lệ nước.
-                    ? null // null nghĩa là chưa đủ dữ liệu để tính.
-                    : population.value * (100 - waterAccess) / 100, // Dân số nhân phần trăm chưa tiếp cận.
-                mortalityRate: Number.isFinite(mortality?.value) ? mortality.value : null, // Tỷ lệ tử vong hoặc null.
-                mortalityYear: mortality?.date || null // Năm tử vong tương ứng hoặc null.
-            }; // Kết thúc object chuẩn hóa của một quốc gia.
-        }); // Kết thúc việc xử lý toàn bộ danh sách quốc gia.
-
-    return countries; // Trả danh sách đã lọc và ghép cho information.js.
+            // Chuẩn hóa các API thành một object thống nhất để information.js dễ dùng.
+            return {
+                code: population.countryiso3code,
+                name: population.country.value,
+                population: population.value,
+                populationYear: population.date,
+                waterAccess,
+                waterYear: water?.date || null,
+                // Thiếu tỷ lệ nước thì giữ null, không hiểu nhầm là 0% tiếp cận.
+                estimatedWithoutBasicWater: waterAccess === null
+                    ? null
+                    : population.value * (100 - waterAccess) / 100,
+                mortalityRate: hasValidMortalityRate ? mortality.value : null,
+                mortalityYear: mortality?.date || null
+            };
+        });
 }
 
-window.getAfricanWaterStatistics = getAfricanWaterStatistics; // Cho phép file information.js gọi hàm này.
+// Cho information.js truy cập hàm qua window vì hai tệp được nạp bằng script riêng.
+window.getAfricanWaterStatistics = getAfricanWaterStatistics;
